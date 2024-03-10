@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatefulWidget {
-  NotificationPage({super.key});
+  const NotificationPage({super.key});
 
+  @override
   State<NotificationPage> createState() => _NotificationPageState();
 }
 
@@ -45,18 +46,18 @@ class _NotificationPageState extends State<NotificationPage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   color: Colors.black,
                 )),
-            Text(
+            const Text(
               "Notifications",
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 25,
                   fontWeight: FontWeight.w600),
             ),
-            SizedBox(
+            const SizedBox(
               height: 0,
               width: 35,
             )
@@ -64,7 +65,7 @@ class _NotificationPageState extends State<NotificationPage> {
         ),
         Expanded(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 7),
+            padding: const EdgeInsets.symmetric(vertical: 7),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -128,10 +129,10 @@ class _NotificationPageState extends State<NotificationPage> {
 
   notificationTile(title, value, void Function(bool)? onChange) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 4),
+      margin: const EdgeInsets.symmetric(vertical: 4),
       child: Container(
-        padding: EdgeInsets.all(14),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(14),
+        decoration: const BoxDecoration(
             color: Color(0xFFF9F9F9),
             borderRadius: BorderRadius.all(Radius.circular(16))),
         child: Row(
@@ -139,7 +140,7 @@ class _NotificationPageState extends State<NotificationPage> {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xFF4E4E4E),
                   fontSize: 16,
                   fontWeight: FontWeight.w600),
@@ -152,8 +153,8 @@ class _NotificationPageState extends State<NotificationPage> {
                 child: CupertinoSwitch(
                   value: value,
                   onChanged: onChange,
-                  activeColor: Color(0xFF6F30C0),
-                  trackColor: Color(0xFFD1D1D1),
+                  activeColor: const Color(0xFF6F30C0),
+                  trackColor: const Color(0xFFD1D1D1),
                 ),
               ),
             )

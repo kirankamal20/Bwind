@@ -1,6 +1,5 @@
 import 'package:bwind/Model/FireAuth.dart';
 import 'package:bwind/Model/Userbase.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../Model/Course.dart';
@@ -11,7 +10,8 @@ class PaymentOptionPage extends StatefulWidget {
   Course course;
   PaymentOptionPage({super.key,required this.course});
 
-  State<PaymentOptionPage> createState() => _PaymentOptionPageState(this.course);
+  @override
+  State<PaymentOptionPage> createState() => _PaymentOptionPageState(course);
 }
 
 class _PaymentOptionPageState extends State<PaymentOptionPage> {
@@ -34,7 +34,7 @@ class _PaymentOptionPageState extends State<PaymentOptionPage> {
     paymentCardWidgetList = [];
     setState(() {
       for(PaymentCard paymentCard in paymentcardList!){
-        paymentCardWidgetList.add(paymentTile("assets/images/mastercard_icon.png",  "**** **** **** " + paymentCard.cardNumber.substring(12), paymentCard.cardNumber , paymentMethod, (value) {
+        paymentCardWidgetList.add(paymentTile("assets/images/mastercard_icon.png",  "**** **** **** ${paymentCard.cardNumber.substring(12)}", paymentCard.cardNumber , paymentMethod, (value) {
           setState(() {
             paymentMethod = value;
           });
@@ -64,26 +64,26 @@ class _PaymentOptionPageState extends State<PaymentOptionPage> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.black,
                       )),
-                  Text(
+                  const Text(
                     "Enroll Course",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 25,
                         fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 0,
                     width: 35,
                   )
                 ],
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 20),
-                child: Text(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                child: const Text(
                   "Select the Payment method you want to use",
                   style: TextStyle(
                       color: Color(0xFF979797),
@@ -116,24 +116,24 @@ class _PaymentOptionPageState extends State<PaymentOptionPage> {
                         children: paymentCardWidgetList,
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 20),
+                        margin: const EdgeInsets.symmetric(vertical: 20),
                         child: OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                              backgroundColor: Color(0xFFCFBAE3),
+                              backgroundColor: const Color(0xFFCFBAE3),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(75),
                               ),
-                              side: BorderSide(
+                              side: const BorderSide(
                                   color:  Color(0xFFCFBAE3),
                                   width: 1,
                                   style: BorderStyle.solid
                               )
                           ),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>AddNewCardPage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const AddNewCardPage()));
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
                                 vertical: 18.0),
                             child: Text(
                               "Add New Card",
@@ -156,11 +156,11 @@ class _PaymentOptionPageState extends State<PaymentOptionPage> {
           bottom: 20,
           width: MediaQuery.of(context).size.width - 32,
           child: InkWell(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
+            borderRadius: const BorderRadius.all(Radius.circular(50)),
             onTap: () {},
             child: Container(
-                padding: EdgeInsets.symmetric(vertical: 18.0),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.symmetric(vertical: 18.0),
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                     color: Color(0xFF6F30C0),
                     boxShadow: [
@@ -173,7 +173,7 @@ class _PaymentOptionPageState extends State<PaymentOptionPage> {
                 child: Center(
                   child: Text(
                     "Enroll Course - \$${course.price}",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                         fontSize: 16),
@@ -187,10 +187,10 @@ class _PaymentOptionPageState extends State<PaymentOptionPage> {
 
   paymentTile(image, title, value, groupValue, void Function(dynamic)? onChange) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 9),
+      margin: const EdgeInsets.symmetric(vertical: 9),
       child: Container(
-        padding: EdgeInsets.all(14),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(14),
+        decoration: const BoxDecoration(
             color: Color(0xFFF9F9F9),
             borderRadius: BorderRadius.all(Radius.circular(16))),
         child: Row(
@@ -207,7 +207,7 @@ class _PaymentOptionPageState extends State<PaymentOptionPage> {
                 ),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Color(0xFF4E4E4E),
                       fontSize: 16,
                       fontWeight: FontWeight.w600),

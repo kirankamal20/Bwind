@@ -6,13 +6,14 @@ import '../../translates/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
+  @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   List<Map<String, String>> topMentorsList = [
     {"image": "assets/images/profile4.png", "name": "Dhyan"},
@@ -53,15 +54,15 @@ class _HomePageState extends State<HomePage> {
       3,
       (index) {
         return AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            margin: EdgeInsets.symmetric(horizontal: 3),
+            duration: const Duration(milliseconds: 300),
+            margin: const EdgeInsets.symmetric(horizontal: 3),
             height: 5,
             width: index == _currentPage! ? 25 : 5,
             decoration: BoxDecoration(
                 color: index == _currentPage!
-                    ? Color(0xFF6F30C0)
-                    : Color(0xFFCFBAE3),
-                borderRadius: BorderRadius.all(Radius.circular(50))));
+                    ? const Color(0xFF6F30C0)
+                    : const Color(0xFFCFBAE3),
+                borderRadius: const BorderRadius.all(Radius.circular(50))));
       },
     );
 
@@ -70,8 +71,8 @@ class _HomePageState extends State<HomePage> {
         children: [
           Container(
             height: 230,
-            padding: EdgeInsets.only(top: 60, bottom: 20, left: 16, right: 16),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.only(top: 60, bottom: 20, left: 16, right: 16),
+            decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/images/homepage_appbar_bg.png"),
                   fit: BoxFit.cover),
@@ -92,17 +93,15 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.7,
                           child: Text(
-                            LocaleKeys.home_hey.tr() +
-                                " " +
-                                _currentUser!.displayName.toString(),
+                            "${LocaleKeys.home_hey.tr()} ${_currentUser!.displayName}",
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
                                 fontWeight: FontWeight.w700),
                           ),
                         ),
-                        Text(
+                        const Text(
                           "Let’s Start Learning!",
                           style: TextStyle(
                               color: Colors.white,
@@ -111,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                         )
                       ],
                     ),
-                    CircleAvatar(
+                    const CircleAvatar(
                       backgroundImage:
                           AssetImage("assets/images/profile_picture.png"),
                       radius: 30,
@@ -123,12 +122,12 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => HomeSearchScreen()));
+                            builder: (context) => const HomeSearchScreen()));
                   },
                   child: Container(
                     height: 50,
                     width: MediaQuery.of(context).size.width - 32,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
@@ -136,13 +135,13 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
-                          children: [
+                          children: const [
                             SizedBox(
                               height: 45,
                               width: 45,
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                    EdgeInsets.symmetric(horizontal: 10),
                                 child: ImageIcon(
                                   AssetImage("assets/images/search_icon.png"),
                                   color: Color(0xFFD1D1D1),
@@ -156,8 +155,8 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.w400)),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 11),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 11),
                           child: ImageIcon(
                             AssetImage('assets/images/filter_icon.png'),
                             size: 20,
@@ -172,14 +171,14 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 28),
+            margin: const EdgeInsets.only(top: 28),
             child: Column(
               children: [
                 SizedBox(
                   height: 170,
                   width: MediaQuery.of(context).size.width - 32,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(18)),
+                    borderRadius: const BorderRadius.all(Radius.circular(18)),
                     child: PageView.builder(
                         itemCount: 3,
                         controller: _pageController,
@@ -194,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 11),
+                  margin: const EdgeInsets.only(top: 11),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: dots,
@@ -207,7 +206,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 Container(
-                    margin: EdgeInsets.symmetric(vertical: 15),
+                    margin: const EdgeInsets.symmetric(vertical: 15),
                     child: Column(
                       children: [
                         Padding(
@@ -221,13 +220,13 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Text(
                                       LocaleKeys.home_view_all.tr(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Color(0xFF6F30C0),
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
+                                    const Padding(
+                                      padding: EdgeInsets.symmetric(
                                           horizontal: 3),
                                       child: ImageIcon(
                                         AssetImage(
@@ -244,7 +243,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 15),
+                          margin: const EdgeInsets.only(top: 15),
                           width: MediaQuery.of(context).size.width,
                           height: 90,
                           child: topMentorListView(),
@@ -258,7 +257,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 Container(
-                    margin: EdgeInsets.symmetric(vertical: 15),
+                    margin: const EdgeInsets.symmetric(vertical: 15),
                     child: Column(
                       children: [
                         Padding(
@@ -273,13 +272,13 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Text(
                                       LocaleKeys.home_view_all.tr(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Color(0xFF6F30C0),
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
+                                    const Padding(
+                                      padding: EdgeInsets.symmetric(
                                           horizontal: 3),
                                       child: ImageIcon(
                                         AssetImage(
@@ -296,7 +295,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 15),
+                          margin: const EdgeInsets.only(top: 15),
                           width: MediaQuery.of(context).size.width,
                           height: 80,
                           child: mostPospularCourseListView(),
@@ -313,8 +312,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget pageViewTile() {
     return Container(
-        padding: EdgeInsets.all(18),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(18),
+        decoration: const BoxDecoration(
           color: Color(0xFFA069E5),
           image: DecorationImage(
               image: AssetImage("assets/images/home_pageview_bg design.png"),
@@ -330,7 +329,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     Text(
                       "40% OFF",
                       style: TextStyle(
@@ -347,7 +346,7 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
-                Text(
+                const Text(
                   "40%",
                   style: TextStyle(
                       color: Colors.white,
@@ -360,7 +359,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(bottom: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     "Get a discount for every course order!",
                     style: TextStyle(
@@ -385,20 +384,20 @@ class _HomePageState extends State<HomePage> {
   listTitle(title) {
     return Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
           color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
     );
   }
 
   topMentorTile(image, name) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         children: [
           CircleAvatar(
             // radius: 31.5,
             radius: 30,
-            backgroundColor: Color(0xFF6F30C0),
+            backgroundColor: const Color(0xFF6F30C0),
             child: CircleAvatar(
               backgroundImage: AssetImage(image),
               radius: 30,
@@ -406,7 +405,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Text(
             name,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400),
           ),
         ],
@@ -416,7 +415,7 @@ class _HomePageState extends State<HomePage> {
 
   topMentorListView() {
     return ListView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         scrollDirection: Axis.horizontal,
         itemCount: topMentorsList.length,
         itemBuilder: (context, index) {
@@ -427,19 +426,19 @@ class _HomePageState extends State<HomePage> {
 
   mostPopulerCourseTile(String image, String categoryName) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
       child: Stack(
         alignment: AlignmentDirectional.center,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
             child: Image(
               image: AssetImage(image),
             ),
           ),
           Text(
             categoryName,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20),
           )
         ],
@@ -449,7 +448,7 @@ class _HomePageState extends State<HomePage> {
 
   mostPospularCourseListView() {
     return ListView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         scrollDirection: Axis.horizontal,
         itemCount: mostPopulerCourseList.length,
         itemBuilder: (context, index) {

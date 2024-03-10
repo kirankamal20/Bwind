@@ -1,6 +1,4 @@
 import 'package:bwind/UI/Home/PaymentOptionPage.dart';
-import 'package:bwind/UI/Home/PaymentOptionSettingPage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../Model/Course.dart';
@@ -15,8 +13,9 @@ class CourseDetailPage extends StatefulWidget {
   CourseDetailPage(
       {super.key, required this.course, required this.bookmarkedCourse});
 
+  @override
   State<CourseDetailPage> createState() =>
-      _CourseDetailPageState(this.course, this.bookmarkedCourse);
+      _CourseDetailPageState(course, bookmarkedCourse);
 }
 
 class _CourseDetailPageState extends State<CourseDetailPage>
@@ -31,13 +30,13 @@ class _CourseDetailPageState extends State<CourseDetailPage>
 
 
   List<Tab> tabs = <Tab>[
-    Tab(
+    const Tab(
       text: "About",
     ),
-    Tab(
+    const Tab(
       text: "Lessons",
     ),
-    Tab(
+    const Tab(
       text: "Reviews",
     ),
   ];
@@ -59,7 +58,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
   void dispose() {
     // TODO: implement dispose
     Userbase.updateBookmarksList(
-        FireAuth.auth.currentUser!.uid, bookmarkedCourse!);
+        FireAuth.auth.currentUser!.uid, bookmarkedCourse);
     super.dispose();
   }
 
@@ -83,18 +82,18 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back,
                           color: Colors.black,
                         )),
-                    Text(
+                    const Text(
                       "Course",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 25,
                           fontWeight: FontWeight.w600),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 0,
                       width: 35,
                     )
@@ -107,21 +106,21 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                       width: MediaQuery.of(context).size.width - 32,
                       height: MediaQuery.of(context).size.height * 0.30,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
                           image: DecorationImage(
                               image: AssetImage(course.image!), fit: BoxFit.fill)),
                     ),
                     Container(
                       width: 150,
-                      margin: EdgeInsets.all(12),
-                      padding: EdgeInsets.symmetric(vertical: 9, horizontal: 22),
-                      decoration: BoxDecoration(
+                      margin: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 22),
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(7))),
                       child: Center(
                         child: Text(
                           course.category!,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Color(0xFF6F30C0),
                               fontSize: 12,
                               fontWeight: FontWeight.w600),
@@ -131,7 +130,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10),
+                  margin: const EdgeInsets.only(top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -140,7 +139,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                         child: Text(
                           course.courseName!,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.black,
                               fontSize: 25,
                               fontWeight: FontWeight.w600),
@@ -160,12 +159,12 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                         },
                         icon: ImageIcon(
                           bookmarkedCourse.contains(course.docId)
-                              ? AssetImage("assets/images/bookmark_filled_icon.png")
-                              : AssetImage(
+                              ? const AssetImage("assets/images/bookmark_filled_icon.png")
+                              : const AssetImage(
                                   "assets/images/bookmark_outlined_icon.png"),
                           color: bookmarkedCourse.contains(course.docId)
-                              ? Color(0xFF6F30C0)
-                              : Color(0xFFD1D1D1),
+                              ? const Color(0xFF6F30C0)
+                              : const Color(0xFFD1D1D1),
                           size: 26,
                         ),
                       )
@@ -173,7 +172,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 8),
+                  margin: const EdgeInsets.only(top: 8),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -182,16 +181,16 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "\$" + course.price.toString(),
-                            style: TextStyle(
+                            "\$${course.price}",
+                            style: const TextStyle(
                                 color: Color(0xFF6F30C0),
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600),
                           ),
-                          SizedBox(width: 8,),
+                          const SizedBox(width: 8,),
                           Text(
-                            "\$" + course.originalPrice.toString(),
-                            style: TextStyle(
+                            "\$${course.originalPrice}",
+                            style: const TextStyle(
                                 color: Color(0xFF979797),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -200,7 +199,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                         ],
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 18),
+                        margin: const EdgeInsets.only(left: 18),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -212,8 +211,8 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                               allowHalfRating: true,
                               itemCount: 1,
                               itemSize: 23,
-                              itemPadding: EdgeInsets.only(right: 6),
-                              itemBuilder: (context, _) => Icon(
+                              itemPadding: const EdgeInsets.only(right: 6),
+                              itemBuilder: (context, _) => const Icon(
                                 Icons.star,
                                 color: Color(0xFFFFC90C),
                               ),
@@ -221,7 +220,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                             ),
                             Text(
                               course.ratting.toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 16),
@@ -241,17 +240,17 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                     children: [
                       Row(
                         children: [
-                          ImageIcon(
+                          const ImageIcon(
                             AssetImage("assets/images/peoples_icon.png"),
                             color: Color(0xFF6F30C0),
                             size: 20,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 6,
                           ),
                           Text(
-                            course.enrolledStudent.toString() + "Students",
-                            style: TextStyle(
+                            "${course.enrolledStudent}Students",
+                            style: const TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 14),
@@ -259,7 +258,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                         ],
                       ),
                       Row(
-                        children: [
+                        children: const [
                           ImageIcon(
                             AssetImage("assets/images/clock_icon.png"),
                             size: 20,
@@ -278,7 +277,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                         ],
                       ),
                       Row(
-                        children: [
+                        children: const [
                           ImageIcon(
                             AssetImage("assets/images/document_icon.png"),
                             size: 20,
@@ -302,11 +301,11 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                 TabBar(
                   tabs: tabs,
                   controller: _tabController,
-                  unselectedLabelColor: Color(0xFFD1D1D1),
-                  labelColor: Color(0xFF6F30C0),
-                  indicatorColor: Color(0xFF6F30C0),
-                  indicatorPadding: EdgeInsets.symmetric(horizontal: 15),
-                  labelStyle: TextStyle(
+                  unselectedLabelColor: const Color(0xFFD1D1D1),
+                  labelColor: const Color(0xFF6F30C0),
+                  indicatorColor: const Color(0xFF6F30C0),
+                  indicatorPadding: const EdgeInsets.symmetric(horizontal: 15),
+                  labelStyle: const TextStyle(
                       color: Color(0xFF6F30C0),
                       fontWeight: FontWeight.w600,
                       fontSize: 16),
@@ -326,14 +325,14 @@ class _CourseDetailPageState extends State<CourseDetailPage>
             bottom: 20,
             width: MediaQuery.of(context).size.width - 32,
             child: InkWell(
-              borderRadius: BorderRadius.all(Radius.circular(50)),
+              borderRadius: const BorderRadius.all(Radius.circular(50)),
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentOptionPage(course: course)));
               },
               child: Container(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                       vertical: 18.0),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                     color: Color(0xFF6F30C0),
                     boxShadow: [
@@ -343,7 +342,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                   child: Center(
                     child: Text(
                       "Enroll Course - \$${course.price}",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                           fontSize: 16),
@@ -362,20 +361,20 @@ class _CourseDetailPageState extends State<CourseDetailPage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.only(top: 22),
-            child: Text(
+            margin: const EdgeInsets.only(top: 22),
+            child: const Text(
               "Mentor",
               style: TextStyle(
                   color: Colors.black, fontWeight: FontWeight.w600, fontSize: 16),
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 4),
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
+            margin: const EdgeInsets.symmetric(vertical: 4),
+            padding: const EdgeInsets.all(8),
+            decoration: const BoxDecoration(
                 color: Color(0xFFF9F9F9),
                 borderRadius: BorderRadius.all(Radius.circular(40))),
-            child:mentor==null?SizedBox(): Row(
+            child:mentor==null?const SizedBox(): Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
@@ -391,14 +390,14 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                         children: [
                           Text(
                             mentor!.name.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600),
                           ),
                           Text(
                             mentor!.about.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color(0xFF979797),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400),
@@ -416,7 +415,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                               builder: (context) =>
                                   ChattingPage(receiverUser: mentor!.toMap())));
                     },
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage("assets/images/message_text_icon.png"),
                       color: Color(0xFF6F30C0),
                       size: 20,
@@ -425,8 +424,8 @@ class _CourseDetailPageState extends State<CourseDetailPage>
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 22, bottom: 10),
-            child: Text(
+            margin: const EdgeInsets.only(top: 22, bottom: 10),
+            child: const Text(
               "About Course",
               style: TextStyle(
                   color: Colors.black, fontWeight: FontWeight.w600, fontSize: 16),
@@ -437,7 +436,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
             child: Text(
               course.about!,
               textAlign: TextAlign.justify,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xFF4E4E4E), fontWeight: FontWeight.w400, fontSize: 12),
             ),
           ),

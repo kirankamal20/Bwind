@@ -1,10 +1,10 @@
 import 'package:bwind/UI/Home/CouseList.dart';
-import 'package:bwind/UI/Home/MyCoursePage.dart';
 import 'package:flutter/material.dart';
 
 class OngoingCourse extends StatefulWidget {
-  OngoingCourse({super.key});
+  const OngoingCourse({super.key});
 
+  @override
   State<OngoingCourse> createState() => _OngoingCourseState();
 }
 

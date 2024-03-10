@@ -1,6 +1,6 @@
 import 'package:bwind/Model/FireAuth.dart';
 import 'package:bwind/Model/Userbase.dart';
-import 'package:bwind/Validator.dart';
+import 'package:bwind/validator.dart';
 import 'package:bwind/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,13 +9,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../Model/RefreshBloc.dart';
 
 class EditProfilePage extends StatefulWidget {
-  EditProfilePage({super.key});
+  const EditProfilePage({super.key});
 
+  @override
   State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  GlobalKey<FormState> _editProfileFormKey = GlobalKey();
+  final GlobalKey<FormState> _editProfileFormKey = GlobalKey();
 
   final _nameController = TextEditingController();
   final _DOBController = TextEditingController();
@@ -40,13 +41,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
     _nameController.text =
         userbase!.name != null ? userbase!.name.toString() : "";
 
-    pickedDate = userbase!.DOB != null ? userbase!.DOB : null;
+    pickedDate = userbase!.DOB;
     _DOBController.text = userbase!.DOB != null
-        ? userbase!.DOB!.day.toString() +
-            "/" +
-            userbase!.DOB!.month.toString() +
-            "/" +
-            userbase!.DOB!.year.toString()
+        ? "${userbase!.DOB!.day}/${userbase!.DOB!.month}/${userbase!.DOB!.year}"
         : "";
     _emailController.text =
         userbase!.email != null ? userbase!.email.toString() : "";
@@ -68,18 +65,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   color: Colors.black,
                 )),
-            Text(
+            const Text(
               "Edit Profile",
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 25,
                   fontWeight: FontWeight.w600),
             ),
-            SizedBox(
+            const SizedBox(
               height: 0,
               width: 35,
             )
@@ -93,7 +90,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top: 15),
+                    margin: const EdgeInsets.only(top: 15),
                     child: Form(
                       key: _editProfileFormKey,
                       child: Column(
@@ -101,7 +98,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           Stack(
                               alignment: AlignmentDirectional.bottomEnd,
                               children: [
-                                CircleAvatar(
+                                const CircleAvatar(
                                   backgroundColor: Color(0xFF6F30C0),
                                   radius: 65,
                                   child: CircleAvatar(
@@ -118,11 +115,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     child: Container(
                                       height: 32,
                                       width: 32,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Color(0xFF6F30C0),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(50))),
-                                      child: Center(
+                                      child: const Center(
                                         child: ImageIcon(
                                           AssetImage(
                                               "assets/images/edit_icon.png"),
@@ -139,8 +136,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(top: 15, bottom: 4),
-                                child: Text(
+                                margin: const EdgeInsets.only(top: 15, bottom: 4),
+                                child: const Text(
                                   "Name",
                                   style: TextStyle(
                                       color: Color(0xFF4E4E4E),
@@ -157,18 +154,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                           color: Color(0xFFD1D1D1), width: 1),
                                     ),
-                                    contentPadding: EdgeInsets.symmetric(
+                                    contentPadding: const EdgeInsets.symmetric(
                                         vertical: 13, horizontal: 11),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                           color: Color(0xFF6F30C0), width: 1),
                                     ),
                                     hintText: "Name"),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Color(0xFF979797),
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400),
@@ -180,8 +177,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(top: 15, bottom: 4),
-                                child: Text(
+                                margin: const EdgeInsets.only(top: 15, bottom: 4),
+                                child: const Text(
                                   "Date Of Birth",
                                   style: TextStyle(
                                       color: Color(0xFF4E4E4E),
@@ -197,18 +194,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                         color: Color(0xFFD1D1D1), width: 1),
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                       vertical: 13, horizontal: 11),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                         color: Color(0xFF6F30C0), width: 1),
                                   ),
                                   hintText: "DOB",
-                                  suffixIcon: Icon(Icons.calendar_month,
+                                  suffixIcon: const Icon(Icons.calendar_month,
                                       color: Color(0xFF6F30C0)),
                                 ),
                                 readOnly: true,
@@ -219,13 +216,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       firstDate: DateTime(1950),
                                       lastDate: DateTime.now());
                                   _DOBController.text =
-                                      pickedDate!.day.toString() +
-                                          "/" +
-                                          pickedDate!.month.toString() +
-                                          "/" +
-                                          pickedDate!.year.toString();
+                                      "${pickedDate!.day}/${pickedDate!.month}/${pickedDate!.year}";
                                 },
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Color(0xFF979797),
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400),
@@ -237,8 +230,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(top: 15, bottom: 4),
-                                child: Text(
+                                margin: const EdgeInsets.only(top: 15, bottom: 4),
+                                child: const Text(
                                   "Email Address",
                                   style: TextStyle(
                                       color: Color(0xFF4E4E4E),
@@ -254,18 +247,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                           color: Color(0xFFD1D1D1), width: 1),
                                     ),
-                                    contentPadding: EdgeInsets.symmetric(
+                                    contentPadding: const EdgeInsets.symmetric(
                                         vertical: 13, horizontal: 11),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                           color: Color(0xFF6F30C0), width: 1),
                                     ),
                                     hintText: "Email "),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Color(0xFF979797),
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400),
@@ -277,8 +270,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(top: 15, bottom: 4),
-                                child: Text(
+                                margin: const EdgeInsets.only(top: 15, bottom: 4),
+                                child: const Text(
                                   "Gender",
                                   style: TextStyle(
                                       color: Color(0xFF4E4E4E),
@@ -295,18 +288,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                           color: Color(0xFFD1D1D1), width: 1),
                                     ),
-                                    contentPadding: EdgeInsets.symmetric(
+                                    contentPadding: const EdgeInsets.symmetric(
                                         vertical: 13, horizontal: 11),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                           color: Color(0xFF6F30C0), width: 1),
                                     ),
                                     hintText: "Gender"),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Color(0xFF979797),
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400),
@@ -317,13 +310,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                   ),
-                  Expanded(flex: 0, child: SizedBox()),
+                  const Expanded(flex: 0, child: SizedBox()),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 30),
+                    margin: const EdgeInsets.symmetric(vertical: 30),
                     child: OutlinedButton(
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Color(0xFF6F30C0)),
+                              MaterialStateProperty.all(const Color(0xFF6F30C0)),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(75),
@@ -357,8 +350,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             }
                           }
                         },
-                        child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 18.0),
+                        child: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 18.0),
                             child: Text(
                               "Update",
                               style: TextStyle(

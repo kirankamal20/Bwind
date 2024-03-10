@@ -9,7 +9,8 @@ class CoursePage extends StatefulWidget{
   Map<String, dynamic> course;
   CoursePage({super.key, required this.course});
 
-  State<CoursePage> createState() => _CoursePageState(this.course);
+  @override
+  State<CoursePage> createState() => _CoursePageState(course);
 }
 
 class _CoursePageState extends State<CoursePage> with SingleTickerProviderStateMixin {
@@ -28,10 +29,10 @@ class _CoursePageState extends State<CoursePage> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     List<Tab> tabs = <Tab>[
-      Tab(
+      const Tab(
         text: "Lessons",
       ),
-      Tab(
+      const Tab(
         text: "Certification",
       )
     ];
@@ -48,11 +49,11 @@ class _CoursePageState extends State<CoursePage> with SingleTickerProviderStateM
                     onPressed: (){
                       Navigator.pop(context);
                     },
-                    icon: Icon(CupertinoIcons.back)
+                    icon: const Icon(CupertinoIcons.back)
                 ),
                 Text(
                   course['course_name'],
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black,
                       fontSize: 25,
                       fontWeight: FontWeight.w600
@@ -61,13 +62,13 @@ class _CoursePageState extends State<CoursePage> with SingleTickerProviderStateM
               ],
             ),
             Container(
-              margin: EdgeInsets.only(top: 12),
+              margin: const EdgeInsets.only(top: 12),
               child: TabBar(
                 tabs: tabs,
                 controller: _tabController,
-                unselectedLabelColor: Color(0xFFD1D1D1),
-                labelColor: Color(0xFF6F30C0),
-                indicatorColor:Color(0xFF6F30C0),
+                unselectedLabelColor: const Color(0xFFD1D1D1),
+                labelColor: const Color(0xFF6F30C0),
+                indicatorColor:const Color(0xFF6F30C0),
               ),
             ),
             Expanded(

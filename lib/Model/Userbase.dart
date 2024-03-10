@@ -31,16 +31,16 @@ class Userbase {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'uid': this.uid,
-      'image': this.image,
-      'name': this.name,
-      'email': this.email,
-      'password': this.password,
-      "createTime": this.createTime,
-      "DOB": this.DOB,
-      "gender": this.gender,
-      "isMentor": this.isMentor != null ? this.isMentor : false,
-      "about": this.about
+      'uid': uid,
+      'image': image,
+      'name': name,
+      'email': email,
+      'password': password,
+      "createTime": createTime,
+      "DOB": DOB,
+      "gender": gender,
+      "isMentor": isMentor ?? false,
+      "about": about
     };
   }
 
@@ -96,7 +96,7 @@ class Userbase {
   }
 
   static Future<Userbase> getUserBaseByUid(String uid) async {
-    var value = await await FirebaseFirestore.instance
+    var value = await FirebaseFirestore.instance
         .collection('user')
         .doc(uid)
         .get();
@@ -107,9 +107,9 @@ class Userbase {
         password: userMap['password'],
         DOB: userMap['DOB'] != null
             ? DateTime.fromMillisecondsSinceEpoch(
-                userMap!['DOB'].seconds * 1000)
+                userMap['DOB'].seconds * 1000)
             : null,
-        gender: userMap['gender'] ?? null);
+        gender: userMap['gender']);
   }
 
   static Future<bool> updateUserInfo(

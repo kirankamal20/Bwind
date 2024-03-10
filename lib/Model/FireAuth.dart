@@ -12,7 +12,7 @@ class FireAuth {
       {required String name,
       required String email,
       required String password}) async {
-    final auth = await FireAuth.auth;
+    final auth = FireAuth.auth;
     User? user;
     UserCredential? userCredential;
     try {
@@ -20,19 +20,19 @@ class FireAuth {
           email: email, password: password);
       user = userCredential.user;
       await user!.updateDisplayName(name);
-      await user!.reload();
+      await user.reload();
       user = auth.currentUser;
 
       Userbase.insertUser(
           Userbase(
                   name: user!.displayName,
-                  email: user!.email,
+                  email: user.email,
                   password: password,
                   createTime: DateTime.now())
               .toMap(),
-          user!.uid);
+          user.uid);
 
-      user = userCredential!.user;
+      user = userCredential.user;
       return AuthResponse(
           user: user, msg: "Registered Successfully", code: true);
     } on FirebaseAuthException catch (e) {
@@ -52,10 +52,10 @@ class FireAuth {
   static Future<AuthResponse> signInUsingEmailPassword(
       {required String email, required String password}) async {
     User? user;
-    final auth = await FireAuth.auth;
+    final auth = FireAuth.auth;
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
-          email: email, password: password!);
+          email: email, password: password);
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -69,8 +69,8 @@ class FireAuth {
 
   static signOut() async {
     try {
-      final GoogleSignIn _googleSignIn = GoogleSignIn();
-      await _googleSignIn.signOut();
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      await googleSignIn.signOut();
       await FireAuth.auth.signOut();
       return AuthResponse(user: null, msg: "Loged Out", code: true);
     } catch (e) {
@@ -79,23 +79,23 @@ class FireAuth {
   }
 
   static Future<AuthResponse> signInUsingGoogle(BuildContext context) async {
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
-    final GoogleSignInAccount? _googleSignInAccount =
-        await _googleSignIn.signIn();
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
 
-    if (_googleSignInAccount != null) {
-      final GoogleSignInAuthentication _googleSignInAuthentication =
-          await _googleSignInAccount.authentication;
-      final AuthCredential _credential = GoogleAuthProvider.credential(
-          idToken: _googleSignInAuthentication.idToken,
-          accessToken: _googleSignInAuthentication.accessToken);
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken);
       try {
         final UserCredential userCredential =
-            await auth.signInWithCredential(_credential);
+            await auth.signInWithCredential(credential);
         User? user = userCredential.user;
         Userbase.insertUser(
-            Userbase(name: user!.displayName, email: user!.email).toMap(),
-            user!.uid);
+            Userbase(name: user!.displayName, email: user.email).toMap(),
+            user.uid);
         return AuthResponse(user: user, msg: "Login Successfull", code: true);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
@@ -114,8 +114,8 @@ class FireAuth {
   }
 
   static Future<bool> validateCurrentPassword(String currentPassword) async {
-    var auth = await FireAuth.auth;
-    var user = await auth.currentUser;
+    var auth = FireAuth.auth;
+    var user = auth.currentUser;
     var credential = EmailAuthProvider.credential(
         email: user?.email ?? "", password: currentPassword);
     try {
@@ -130,17 +130,17 @@ class FireAuth {
   static changePassword(String currentPassword, String newPassword) async {
     if (await validateCurrentPassword(currentPassword)) {
       try {
-        final auth = await FireAuth.auth;
-        var user = await auth.currentUser;
+        final auth = FireAuth.auth;
+        var user = auth.currentUser;
         await user?.updatePassword(newPassword);
         await Userbase.changePassword(
             Userbase(
                     name: user!.displayName,
-                    email: user!.email,
+                    email: user.email,
                     password: newPassword,
                     createTime: DateTime.now())
                 .toMap(),
-            user!.uid);
+            user.uid);
         return AuthResponse(
             user: null, msg: "Password changed successfully", code: true);
       } catch (e) {
@@ -156,17 +156,17 @@ class FireAuth {
 
   static resetPassword(String newPassword) async {
     try {
-      final auth = await FireAuth.auth;
-      var user = await auth.currentUser;
+      final auth = FireAuth.auth;
+      var user = auth.currentUser;
       await user?.updatePassword(newPassword);
       await Userbase.changePassword(
           Userbase(
                   name: user!.displayName,
-                  email: user!.email,
+                  email: user.email,
                   password: newPassword,
                   createTime: DateTime.now())
               .toMap(),
-          user!.uid);
+          user.uid);
       return AuthResponse(
           user: null, msg: "Password reset successfully", code: true);
     } catch (e) {

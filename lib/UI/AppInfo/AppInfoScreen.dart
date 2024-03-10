@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../Login/LoginOrSignupScreen.dart';
 
 class AppInfoScreen extends StatefulWidget {
-  AppInfoScreen({super.key});
+  const AppInfoScreen({super.key});
 
+  @override
   State<AppInfoScreen> createState() => _AppInfoScreenState();
 }
 
@@ -31,7 +31,7 @@ class _AppInfoScreenState extends State<AppInfoScreen> {
     }
   ];
 
-  PageController _pageController = PageController(initialPage: 0!);
+  final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
 
   @override
@@ -48,13 +48,13 @@ class _AppInfoScreenState extends State<AppInfoScreen> {
       3,
           (index) {
         return AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            margin: EdgeInsets.symmetric(horizontal: 3),
+            duration: const Duration(milliseconds: 300),
+            margin: const EdgeInsets.symmetric(horizontal: 3),
             height: 5,
-            width: index == _currentPage! ? 25 : 5,
+            width: index == _currentPage? 25 : 5,
             decoration: BoxDecoration(
-                color: index == _currentPage! ? Color(0xFF6F30C0) : Color(0xFFCFBAE3),
-                borderRadius: BorderRadius.all(Radius.circular(50))));
+                color: index == _currentPage? const Color(0xFF6F30C0) : const Color(0xFFCFBAE3),
+                borderRadius: const BorderRadius.all(Radius.circular(50))));
       },
     );
 
@@ -73,7 +73,7 @@ class _AppInfoScreenState extends State<AppInfoScreen> {
             height: MediaQuery.of(context).size.height * 0.6,
           ),
           Container(
-            margin: EdgeInsets.only(top: 11),
+            margin: const EdgeInsets.only(top: 11),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: dots,
@@ -86,18 +86,18 @@ class _AppInfoScreenState extends State<AppInfoScreen> {
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(bottom: 12),
+                    margin: const EdgeInsets.only(bottom: 12),
                     child: Text(
                       title,
-                      style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
+                      style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 28),
+                    margin: const EdgeInsets.only(bottom: 28),
                     child: Text(
                       description,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           height: 1.7,
                           fontSize: 14,
                           color: Color(0xFF979797),
@@ -107,7 +107,7 @@ class _AppInfoScreenState extends State<AppInfoScreen> {
                   OutlinedButton(
                       style: ButtonStyle(
                         backgroundColor:
-                        MaterialStateProperty.all(Color(0xFF6F30C0)),
+                        MaterialStateProperty.all(const Color(0xFF6F30C0)),
                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(75),
@@ -119,18 +119,18 @@ class _AppInfoScreenState extends State<AppInfoScreen> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginOrSignupScreen()));
+                                  builder: (context) => const LoginOrSignupScreen()));
                           return;
                         } else {
                           setState(() {
                             _currentPage = _currentPage + 1;
-                            _pageController.animateToPage(_currentPage, duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+                            _pageController.animateToPage(_currentPage, duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
                           });
                           return;
                         }
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(
                             vertical: 15.0, horizontal: 30),
                         child: Text(
                           "Next",

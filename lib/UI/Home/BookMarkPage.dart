@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class BookMarkPage extends StatefulWidget{
-  BookMarkPage({super.key});
+  const BookMarkPage({super.key});
 
+  @override
   State<BookMarkPage> createState() => _BookMarkPageState();
 }
 
 class _BookMarkPageState extends State<BookMarkPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Bookark page"));
+    return const Center(child: Text("Bookark page"));
   }
 }

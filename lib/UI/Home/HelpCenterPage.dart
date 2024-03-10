@@ -4,8 +4,9 @@ import 'ContectUsPage.dart';
 import 'FQAPage.dart';
 
 class HelpCenterPage extends StatefulWidget {
-  HelpCenterPage({super.key});
+  const HelpCenterPage({super.key});
 
+  @override
   State<HelpCenterPage> createState() => _HelpCenterPageState();
 }
 
@@ -22,10 +23,10 @@ class _HelpCenterPageState extends State<HelpCenterPage>
   @override
   Widget build(BuildContext context) {
     List<Tab> tabs = <Tab>[
-      Tab(
+      const Tab(
         text: "FQA",
       ),
-      Tab(
+      const Tab(
         text: "Contect Us",
       )
     ];
@@ -42,33 +43,33 @@ class _HelpCenterPageState extends State<HelpCenterPage>
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                       color: Colors.black,
                     )),
-                Text(
+                const Text(
                   "Help Center",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
                       fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 0,
                   width: 35,
                 )
               ],
             ),
             Container(
-              margin: EdgeInsets.only(top: 12),
+              margin: const EdgeInsets.only(top: 12),
               child: TabBar(
                 tabs: tabs,
                 controller: _helpCenterTabController,
-                unselectedLabelColor: Color(0xFFD1D1D1),
-                labelColor: Color(0xFF6F30C0),
-                indicatorColor: Color(0xFF6F30C0),
-                indicatorPadding: EdgeInsets.symmetric(horizontal: 15),
-                labelStyle: TextStyle(
+                unselectedLabelColor: const Color(0xFFD1D1D1),
+                labelColor: const Color(0xFF6F30C0),
+                indicatorColor: const Color(0xFF6F30C0),
+                indicatorPadding: const EdgeInsets.symmetric(horizontal: 15),
+                labelStyle: const TextStyle(
                     color: Color(0xFF6F30C0),
                     fontWeight: FontWeight.w600,
                     fontSize: 16
@@ -78,7 +79,7 @@ class _HelpCenterPageState extends State<HelpCenterPage>
             Expanded(
               child: TabBarView(
                   controller: _helpCenterTabController,
-                  children: [FQAPage(), ContectUsPage()]),
+                  children: const [FQAPage(), ContectUsPage()]),
             )
           ],
         ),

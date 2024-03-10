@@ -4,8 +4,9 @@ import 'CompletedCourse.dart';
 import 'OngoingCourse.dart';
 
 class MyCoursePage extends StatefulWidget{
-  MyCoursePage({super.key});
+  const MyCoursePage({super.key});
 
+  @override
   State<MyCoursePage> createState() => _MyCoursePageState();
 }
 
@@ -21,10 +22,10 @@ class _MyCoursePageState extends State<MyCoursePage> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     List<Tab> tabs = <Tab>[
-      Tab(
+      const Tab(
         text: "Ongoing",
       ),
-      Tab(
+      const Tab(
         text: "Completed",
       )
     ];
@@ -35,7 +36,7 @@ class _MyCoursePageState extends State<MyCoursePage> with SingleTickerProviderSt
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               Text(
                 "My Courses",
                   style: TextStyle(
@@ -47,15 +48,15 @@ class _MyCoursePageState extends State<MyCoursePage> with SingleTickerProviderSt
             ],
           ),
           Container(
-            margin: EdgeInsets.only(top: 12),
+            margin: const EdgeInsets.only(top: 12),
             child: TabBar(
                 tabs: tabs,
               controller: _tabController,
-              unselectedLabelColor: Color(0xFFD1D1D1),
-              labelColor: Color(0xFF6F30C0),
-              indicatorColor:Color(0xFF6F30C0),
-              indicatorPadding: EdgeInsets.symmetric(horizontal: 15),
-              labelStyle: TextStyle(
+              unselectedLabelColor: const Color(0xFFD1D1D1),
+              labelColor: const Color(0xFF6F30C0),
+              indicatorColor:const Color(0xFF6F30C0),
+              indicatorPadding: const EdgeInsets.symmetric(horizontal: 15),
+              labelStyle: const TextStyle(
                   color: Color(0xFF6F30C0),
                   fontWeight: FontWeight.w600,
                   fontSize: 16
@@ -65,7 +66,7 @@ class _MyCoursePageState extends State<MyCoursePage> with SingleTickerProviderSt
           Expanded(
             child: TabBarView(
               controller: _tabController,
-                children: [
+                children: const [
                   OngoingCourse(),
                   CompletedCourse()
                 ]

@@ -3,8 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SecurityPage extends StatefulWidget {
-  SecurityPage({super.key});
+  const SecurityPage({super.key});
 
+  @override
   State<SecurityPage> createState() => _SecurityPageState();
 }
 
@@ -37,18 +38,18 @@ class _SecurityPageState extends State<SecurityPage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                       color: Colors.black,
                     )),
-                Text(
+                const Text(
                   "Security",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
                       fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 0,
                   width: 35,
                 )
@@ -56,7 +57,7 @@ class _SecurityPageState extends State<SecurityPage> {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 7),
+                padding: const EdgeInsets.symmetric(vertical: 7),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,22 +81,22 @@ class _SecurityPageState extends State<SecurityPage> {
                             });
                           }),
                       Container(
-                        margin: EdgeInsets.only(top: 28,bottom: 9),
+                        margin: const EdgeInsets.only(top: 28,bottom: 9),
                         child: OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                            backgroundColor: Color(0xFFCFBAE3),
+                            backgroundColor: const Color(0xFFCFBAE3),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(75),
                               ),
-                              side: BorderSide(
+                              side: const BorderSide(
                                   color:  Color(0xFFCFBAE3),
                                   width: 1,
                                   style: BorderStyle.solid
                               )
                           ),
                           onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
                                 vertical: 18.0),
                             child: Text(
                               "Change Pin",
@@ -108,24 +109,24 @@ class _SecurityPageState extends State<SecurityPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 9),
+                        margin: const EdgeInsets.symmetric(vertical: 9),
                         child: OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                            backgroundColor: Color(0xFFCFBAE3),
+                            backgroundColor: const Color(0xFFCFBAE3),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(75),
                               ),
-                              side: BorderSide(
+                              side: const BorderSide(
                                   color:  Color(0xFFCFBAE3),
                                   width: 1,
                                   style: BorderStyle.solid
                               )
                           ),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ChangePasswordScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChangePasswordScreen()));
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
                                 vertical: 18.0),
                             child: Text(
                               "Change Password",
@@ -149,10 +150,10 @@ class _SecurityPageState extends State<SecurityPage> {
 
   securityTile(title, value, void Function(bool)? onChange) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 4),
+      margin: const EdgeInsets.symmetric(vertical: 4),
       child: Container(
-        padding: EdgeInsets.all(14),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(14),
+        decoration: const BoxDecoration(
             color: Color(0xFFF9F9F9),
             borderRadius: BorderRadius.all(Radius.circular(16))),
         child: Row(
@@ -160,7 +161,7 @@ class _SecurityPageState extends State<SecurityPage> {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xFF4E4E4E),
                   fontSize: 16,
                   fontWeight: FontWeight.w600),
@@ -173,8 +174,8 @@ class _SecurityPageState extends State<SecurityPage> {
                 child: CupertinoSwitch(
                   value: value,
                   onChanged: onChange,
-                  activeColor: Color(0xFF6F30C0),
-                  trackColor: Color(0xFFD1D1D1),
+                  activeColor: const Color(0xFF6F30C0),
+                  trackColor: const Color(0xFFD1D1D1),
                 ),
               ),
             )

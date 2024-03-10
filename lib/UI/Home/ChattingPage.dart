@@ -1,7 +1,6 @@
 import 'package:bwind/Model/Message.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
 import '../../Model/FireAuth.dart';
 
@@ -10,7 +9,8 @@ class ChattingPage extends StatefulWidget {
 
   ChattingPage({super.key, required this.receiverUser});
 
-  State<ChattingPage> createState() => _ChattingPageState(this.receiverUser);
+  @override
+  State<ChattingPage> createState() => _ChattingPageState(receiverUser);
 }
 
 class _ChattingPageState extends State<ChattingPage> {
@@ -18,7 +18,7 @@ class _ChattingPageState extends State<ChattingPage> {
 
   User? _currentUser;
 
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -109,20 +109,20 @@ class _ChattingPageState extends State<ChattingPage> {
                     onPressed: () {
 Navigator.pop(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                       color: Colors.black,
                     )),
                 Text(
                   reciverUser['name'],
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black,
                       fontSize: 25,
                       fontWeight: FontWeight.w600),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: ImageIcon(
+                  icon: const ImageIcon(
                     AssetImage("assets/images/call_icon.png"),
                     color: Color(0xFF6F30C0),
                     size: 25,
@@ -151,36 +151,36 @@ Navigator.pop(context);
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
-                              BorderSide(color: Color(0xFFD1D1D1), width: 1),
+                              const BorderSide(color: Color(0xFFD1D1D1), width: 1),
                         ),
                         contentPadding:
-                            EdgeInsets.symmetric(vertical: 0, horizontal: 13),
+                            const EdgeInsets.symmetric(vertical: 0, horizontal: 13),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide:
-                              BorderSide(color: Color(0xFF6F30C0), width: 1),
+                              const BorderSide(color: Color(0xFF6F30C0), width: 1),
                         ),
                         suffixIcon: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Container(
-                            padding: EdgeInsets.only(left: 7),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.only(left: 7),
+                            decoration: const BoxDecoration(
                               border: Border(
                                   left: BorderSide(color: Color(0xFFD1D1D1))),
                             ),
-                            child: ImageIcon(
+                            child: const ImageIcon(
                               AssetImage("assets/images/image_icon.png"),
                               color: Color(0xFFD1D1D1),
                             ),
                           ),
                         ),
-                        suffixIconConstraints: BoxConstraints(
+                        suffixIconConstraints: const BoxConstraints(
                           minHeight: 22,
                           minWidth: 22,
                         ),
                         hintText: "Type Message...",
-                        hintStyle: TextStyle(color: Color(0xFFD1D1D1))),
-                    style: TextStyle(
+                        hintStyle: const TextStyle(color: Color(0xFFD1D1D1))),
+                    style: const TextStyle(
                         color: Color(0xFF4E4E4E),
                         fontSize: 16,
                         fontWeight: FontWeight.w400),
@@ -199,18 +199,18 @@ Navigator.pop(context);
                     });
                     _scrollController.animateTo(
                         _scrollController.position.maxScrollExtent,
-                        duration: Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         curve: Curves.easeOut);
                   },
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
                   child: Container(
                     height: 48,
                     width: 48,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Color(0xFF6F30C0),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Image(
                         image: AssetImage("assets/images/send_icon.png"),
                         height: 24,
@@ -236,7 +236,7 @@ Navigator.pop(context);
     return  ListView.builder(
         controller: _scrollController,
         reverse:  true,
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         itemCount: msgData.length,
         itemBuilder: (context, index) {
 
@@ -267,18 +267,18 @@ Navigator.pop(context);
                 : CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 width: MediaQuery.of(context).size.width * 0.7,
                 decoration: BoxDecoration(
                   color: sender == _currentUser!.uid
-                      ? Color(0xFF6F30C0)
-                      : Color(0xFFD1D1D1),
+                      ? const Color(0xFF6F30C0)
+                      : const Color(0xFFD1D1D1),
                   borderRadius: sender == _currentUser!.uid
-                      ? BorderRadius.only(
+                      ? const BorderRadius.only(
                           topRight: Radius.circular(10),
                           topLeft: Radius.circular(10),
                           bottomLeft: Radius.circular(10))
-                      : BorderRadius.only(
+                      : const BorderRadius.only(
                           topRight: Radius.circular(10),
                           topLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10),
@@ -296,7 +296,7 @@ Navigator.pop(context);
               ),
               Text(
                 time,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Color(0xFF979797),
                     fontSize: 12,
                     fontWeight: FontWeight.w400),
@@ -318,7 +318,7 @@ Navigator.pop(context);
           if (snapshot.hasData) {
             return msgListView(snapshot.data!.docs);
           }
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
 
         }) ;
   }

@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:bwind/UI/AppInfo/AppInfoScreen.dart';
 import 'package:bwind/UI/Home/HomeScreen.dart';
 import 'package:bwind/UI/Login/LoginOrSignupScreen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 class SplashScreen extends StatefulWidget{
-  SplashScreen({super.key});
+  const SplashScreen({super.key});
 
+  @override
   State<SplashScreen> createState() => _SplashScreenState();
 
 }
@@ -25,16 +25,16 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   checkLoginFN() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    Future.delayed(Duration(seconds: 3),(){
+    Future.delayed(const Duration(seconds: 3),(){
       if( preferences.getBool("isLogedin")!=null){
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            context, MaterialPageRoute(builder: (context) => const HomeScreen()));
       }else if(preferences.getBool("isFirstTime") != null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LoginOrSignupScreen()));
+            context, MaterialPageRoute(builder: (context) => const LoginOrSignupScreen()));
       }else{
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => AppInfoScreen()));
+            context, MaterialPageRoute(builder: (context) => const AppInfoScreen()));
       }
     });
    
@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        color: Color(0xFF6F30C0),
+        color: const Color(0xFF6F30C0),
         child: Center(
             child: Stack(
                 children: [

@@ -8,10 +8,10 @@ class PaymentCard{
 
   Map<String , dynamic> toMap(){
     return {
-      "cardHolderName" : this.cardHolderName,
-      "cardNumber" : this.cardNumber,
-      "expiryDate" : this.expiryDate,
-      "cvv" : this.cvv
+      "cardHolderName" : cardHolderName,
+      "cardNumber" : cardNumber,
+      "expiryDate" : expiryDate,
+      "cvv" : cvv
     };
   }
 }

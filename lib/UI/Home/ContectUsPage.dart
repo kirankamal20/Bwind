@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContectUsPage extends StatefulWidget {
-  ContectUsPage({super.key});
+  const ContectUsPage({super.key});
 
+  @override
   State<ContectUsPage> createState() => _ContectUsPageState();
 }
 
@@ -53,11 +53,11 @@ class _ContectUsPageState extends State<ContectUsPage> {
         Uri uri = Uri.parse(link);
         await launchUrl(uri, mode: LaunchMode.externalApplication);
       },
-        borderRadius: BorderRadius.all(Radius.circular(16)),
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4),
-        padding: EdgeInsets.symmetric(horizontal: 14, vertical: 16),
-        decoration: BoxDecoration(
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+        decoration: const BoxDecoration(
           color: Color(0xFFF9F9F9),
           borderRadius: BorderRadius.all(Radius.circular(16))
         ),
@@ -72,7 +72,7 @@ class _ContectUsPageState extends State<ContectUsPage> {
               padding: const EdgeInsets.symmetric(horizontal:19),
               child: Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600
@@ -87,7 +87,7 @@ class _ContectUsPageState extends State<ContectUsPage> {
 
   ContactListView() {
     return ListView.builder(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
         itemCount: contactList.length,
         itemBuilder: (context, index){
           return contactListTile(contactList[index]['image'], contactList[index]['contact_title'], contactList[index]['link']);

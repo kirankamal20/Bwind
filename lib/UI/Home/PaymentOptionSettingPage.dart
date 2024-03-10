@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PaymentOptionSettingPage extends StatefulWidget {
-  PaymentOptionSettingPage({super.key});
+  const PaymentOptionSettingPage({super.key});
 
+  @override
   State<PaymentOptionSettingPage> createState() => _PaymentOptionSettingPageState();
 }
 
@@ -21,18 +21,18 @@ class _PaymentOptionSettingPageState extends State<PaymentOptionSettingPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back,
                     color: Colors.black,
                   )),
-              Text(
+              const Text(
                 "Payment",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 25,
                     fontWeight: FontWeight.w600),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 0,
                 width: 35,
               )

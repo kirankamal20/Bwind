@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FQAPage extends StatefulWidget {
-  FQAPage({super.key});
+  const FQAPage({super.key});
 
+  @override
   State<FQAPage> createState() => _FQAPageState();
 }
 
@@ -48,8 +48,8 @@ class _FQAPageState extends State<FQAPage> {
   Widget build(BuildContext context) {
     FQAListTile(title, description, index) {
       return Container(
-        margin: EdgeInsets.only(bottom: 22),
-        decoration: BoxDecoration(
+        margin: const EdgeInsets.only(bottom: 22),
+        decoration: const BoxDecoration(
           color: Color(0xFFF9F9F9),
           borderRadius: BorderRadius.all(Radius.circular(14)),
         ),
@@ -63,13 +63,13 @@ class _FQAPageState extends State<FQAPage> {
             },
             title: Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xFF6F30C0),
                   fontSize: 16,
                   fontWeight: FontWeight.w500),
             ),
             trailing: isExpanded![index]
-                ? SizedBox(
+                ? const SizedBox(
               height: 20,
                   width: 20,
                   child: ImageIcon(
@@ -78,7 +78,7 @@ class _FQAPageState extends State<FQAPage> {
                       ),
                     ),
                 )
-                : SizedBox(
+                : const SizedBox(
               height: 20,
                   width: 20,
                   child: ImageIcon(
@@ -89,13 +89,13 @@ class _FQAPageState extends State<FQAPage> {
             children: <Widget>[
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(top: BorderSide(color: Color(0xFFD1D1D1)))
                 ),
                 child: Text(
                   description,
                   textAlign: TextAlign.justify,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Color(0xFF4E4E4E),
                       fontSize: 12,
                       fontWeight: FontWeight.w400),
@@ -120,9 +120,9 @@ class _FQAPageState extends State<FQAPage> {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.symmetric(vertical: 18),
+          margin: const EdgeInsets.symmetric(vertical: 18),
           child: TextFormField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     borderSide: BorderSide(color: Color(0xFFD1D1D1), width: 1)),
@@ -132,7 +132,7 @@ class _FQAPageState extends State<FQAPage> {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     borderSide: BorderSide(color: Color(0xFF6F30C0), width: 1)),
                 prefixIcon: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                   child: ImageIcon(
                     AssetImage("assets/images/search_icon.png"),
                     color: Color(0xFFD1D1D1),
@@ -146,7 +146,7 @@ class _FQAPageState extends State<FQAPage> {
                     color: Color(0xFFD1D1D1),
                     fontSize: 14,
                     fontWeight: FontWeight.w400)),
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
           ),
         ),
         Expanded(

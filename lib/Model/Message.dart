@@ -1,6 +1,5 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class Message{
   String msg;
@@ -12,10 +11,10 @@ class Message{
 
   Map<String, dynamic> toMap(){
     return <String, dynamic>{
-      "msg" : this.msg,
-      "sender" : this.sender,
-      "receiver" : this.receiver,
-      "time" : this.time
+      "msg" : msg,
+      "sender" : sender,
+      "receiver" : receiver,
+      "time" : time
     };
   }
 

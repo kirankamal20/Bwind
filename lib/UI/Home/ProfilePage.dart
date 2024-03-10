@@ -10,15 +10,15 @@ import 'package:bwind/UI/Home/PrivacyPolicyPage.dart';
 import 'package:bwind/UI/Home/SecurityPage.dart';
 import 'package:bwind/UI/Login/LoginOrSignupScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:light_modal_bottom_sheet/light_modal_bottom_sheet.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({super.key});
+  const ProfilePage({super.key});
 
+  @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   "Profile",
                   style: TextStyle(
@@ -52,23 +52,23 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 4),
+                padding: const EdgeInsets.symmetric(vertical: 4),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 14),
+                        margin: const EdgeInsets.symmetric(vertical: 14),
                         child: InkWell(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                          borderRadius: const BorderRadius.all(Radius.circular(16)),
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => EditProfilePage()));
+                                    builder: (context) => const EditProfilePage()));
                           },
                           child: Container(
-                            padding: EdgeInsets.all(14),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(14),
+                            decoration: const BoxDecoration(
                                 color: Color(0xFFF9F9F9),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(16))),
@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               children: [
                                 Row(
                                   children: [
-                                    CircleAvatar(
+                                    const CircleAvatar(
                                       backgroundImage: AssetImage(
                                           "assets/images/profile_picture.png"),
                                       radius: 30,
@@ -94,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             Text(
                                               _currentUser!.displayName.toString(),
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600),
@@ -102,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             Text(
                                               overflow: TextOverflow.ellipsis,
                                               _currentUser!.email.toString(),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: Color(0xFF979797),
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w400),
@@ -113,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   ],
                                 ),
-                                ImageIcon(
+                                const ImageIcon(
                                   AssetImage("assets/images/arrow_right.png"),
                                   color: Colors.black,
                                   size: 16,
@@ -124,62 +124,62 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       profileTile("assets/images/notification_icon.png",
-                          Color(0xFF6F30C0), "Notification", () {
+                          const Color(0xFF6F30C0), "Notification", () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => NotificationPage()));
+                                builder: (context) => const NotificationPage()));
                       }),
                       profileTile("assets/images/add_card_icon.png",
-                          Color(0xFF6F30C0), "Payment", () {
+                          const Color(0xFF6F30C0), "Payment", () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PaymentOptionSettingPage()));
+                                    builder: (context) => const PaymentOptionSettingPage()));
                           }),
                       profileTile("assets/images/shield_icon.png",
-                          Color(0xFF6F30C0), "Security", () {
+                          const Color(0xFF6F30C0), "Security", () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SecurityPage()));
+                                builder: (context) => const SecurityPage()));
                       }),
                       profileTile("assets/images/language_icon.png",
-                          Color(0xFF6F30C0), "Language", () {
+                          const Color(0xFF6F30C0), "Language", () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LanguagePage()));
+                                builder: (context) => const LanguagePage()));
                       }),
                       profileTile("assets/images/notification_icon.png",
-                          Color(0xFF6F30C0), "Privacy Policy", () {
+                          const Color(0xFF6F30C0), "Privacy Policy", () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => PrivacyPolicyPage()));
+                                builder: (context) => const PrivacyPolicyPage()));
                       }),
                       profileTile("assets/images/info_icon.png",
-                          Color(0xFF6F30C0), "Help Center", () {
+                          const Color(0xFF6F30C0), "Help Center", () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HelpCenterPage()));
+                                builder: (context) => const HelpCenterPage()));
                       }),
                       profileTile("assets/images/peoples_icon.png",
-                          Color(0xFF6F30C0), "Invite Friends", () {
+                          const Color(0xFF6F30C0), "Invite Friends", () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => InviteFriendPage()));
+                                builder: (context) => const InviteFriendPage()));
                       }),
                       profileTile("assets/images/logout_icon.png",
-                          Color(0xFFFF0000), "Logout", () {
+                          const Color(0xFFFF0000), "Logout", () {
                              showMaterialModalBottomSheet(
                               backgroundColor: Colors.white,
                               expand: false,
                                 context: context,
                                 builder: (context)=>modelSheet(),
-                              shape: RoundedRectangleBorder(
+                              shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(20),
                                   topLeft: Radius.circular(20),
@@ -199,13 +199,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
   profileTile(iconImage, color, title, Function()? ontap) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 4),
+      margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
         onTap: ontap,
         child: Container(
-          padding: EdgeInsets.all(14),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.all(14),
+          decoration: const BoxDecoration(
               color: Color(0xFFF9F9F9),
               borderRadius: BorderRadius.all(Radius.circular(16))),
           child: Row(
@@ -222,7 +222,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
                       title,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
@@ -230,7 +230,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ],
               ),
-              ImageIcon(
+              const ImageIcon(
                 AssetImage("assets/images/arrow_right.png"),
                 color: Colors.black,
                 size: 16,
@@ -244,23 +244,23 @@ class _ProfilePageState extends State<ProfilePage> {
 
   modelSheet(){
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       height: 270,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.only(bottom: 26),
+            margin: const EdgeInsets.only(bottom: 26),
             height: 5,
             width: 50,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFFD1D1D1),
               borderRadius: BorderRadius.all(Radius.circular(5))
             ),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 18),
-            child: Text(
+            margin: const EdgeInsets.only(bottom: 18),
+            child: const Text(
                 "Log Out",
               style: TextStyle(
                 color: Color(0xFFFF4141),
@@ -270,8 +270,8 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 38),
-            child: Text(
+            margin: const EdgeInsets.only(bottom: 38),
+            child: const Text(
                 "Are you sure you want to log out?",
               style: TextStyle(
                 color: Color(0xFF4E4E4E),
@@ -286,12 +286,12 @@ class _ProfilePageState extends State<ProfilePage> {
               Expanded(
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    backgroundColor: Color(0xFFF9F9F9),
+                    backgroundColor: const Color(0xFFF9F9F9),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(75),
 
                       ),
-                      side: BorderSide(
+                      side: const BorderSide(
                           color: Colors.white,
                           width: 1,
                           style: BorderStyle.solid
@@ -300,8 +300,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   onPressed: () {
                       Navigator.pop(context);
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
                     child: Text(
                       "Cancel",
                       style: TextStyle(
@@ -313,12 +313,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              SizedBox(width: 23,),
+              const SizedBox(width: 23,),
               Expanded(
                 child: OutlinedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all(Color(0xFF6F30C0)),
+                    MaterialStateProperty.all(const Color(0xFF6F30C0)),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(75),
@@ -335,11 +335,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     );
                     if(response.code){
                       await preferences.remove('isLogedin');
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginOrSignupScreen()));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const LoginOrSignupScreen()));
                     }
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
                     child: Text(
                       "Yes, Logout",
                       style: TextStyle(

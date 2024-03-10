@@ -1,5 +1,7 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
+// ignore_for_file: constant_identifier_names
+
 abstract class  LocaleKeys {
   static const home_hey = 'home.hey';
   static const home_home_subtitle = 'home.home_subtitle';
@@ -19,6 +21,7 @@ abstract class  LocaleKeys {
   static const inbox = 'inbox';
   static const profile_profile_settings_notification = 'profile.profile_settings.notification';
   static const profile_profile_settings_payment = 'profile.profile_settings.payment';
+   
   static const profile_profile_settings_security = 'profile.profile_settings.security';
   static const profile_profile_settings_lagunage = 'profile.profile_settings.lagunage';
   static const profile_profile_settings_privacy_policy = 'profile.profile_settings.privacy_policy';

@@ -7,8 +7,9 @@ import 'MyCoursePage.dart';
 import 'ProfilePage.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
+  @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
@@ -40,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen>
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.only(bottom: 17, left: 16, right: 16),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10), color: Colors.black),
             child: TabBar(
@@ -67,16 +68,16 @@ class _HomeScreenState extends State<HomeScreen>
                         ? "assets/images/profile_outlined_icon.png"
                         : "assets/images/profile_filled_icon.png"))),
               ],
-              indicatorColor: Color(0xFF6F30C0),
-              indicatorPadding: EdgeInsets.symmetric(horizontal: 25),
-              unselectedLabelColor: Color(0xFFD1D1D1),
-              labelColor: Color(0xFF6F30C0),
+              indicatorColor: const Color(0xFF6F30C0),
+              indicatorPadding: const EdgeInsets.symmetric(horizontal: 25),
+              unselectedLabelColor: const Color(0xFFD1D1D1),
+              labelColor: const Color(0xFF6F30C0),
             ),
           ),
         ),
         body: TabBarView(
           controller: _tabController,
-          children: [
+          children: const [
             HomePage(),
             MyCoursePage(),
             BookMarkPage(),

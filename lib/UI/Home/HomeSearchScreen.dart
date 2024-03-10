@@ -1,7 +1,6 @@
 import 'package:bwind/Model/Course.dart';
 import 'package:bwind/UI/Home/ChattingPage.dart';
 import 'package:bwind/UI/Home/CourseDetailPage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -12,16 +11,17 @@ import '../../Model/RefreshBloc.dart';
 import '../../Model/Userbase.dart';
 
 class HomeSearchScreen extends StatefulWidget {
-  HomeSearchScreen({super.key});
+  const HomeSearchScreen({super.key});
 
+  @override
   State<HomeSearchScreen> createState() => _HomeSearchScreenState();
 }
 
 class _HomeSearchScreenState extends State<HomeSearchScreen>
     with SingleTickerProviderStateMixin {
-  GlobalKey<FormState> _searchFormKey = GlobalKey();
+  final GlobalKey<FormState> _searchFormKey = GlobalKey();
 
-  FocusNode _textFormFieldFocuseNode = FocusNode();
+  final FocusNode _textFormFieldFocuseNode = FocusNode();
   List<String> recentSearchList = [];
   final _searchFieldController = TextEditingController();
   TabController? _tabController;
@@ -34,7 +34,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
   int filtterRatting = 0;
   double maxPrice = 500;
   double minPrice = 0;
-  RangeValues priceRange = RangeValues(0, 0);
+  RangeValues priceRange = const RangeValues(0, 0);
 
   @override
   void initState() {
@@ -59,7 +59,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
   void dispose() {
     // TODO: implement dispose
     Userbase.updateBookmarksList(
-        FireAuth.auth.currentUser!.uid, bookmarkedCourse!);
+        FireAuth.auth.currentUser!.uid, bookmarkedCourse);
     super.dispose();
   }
 
@@ -149,7 +149,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
         expand: false,
         context: context,
         builder: (context) => modelSheet(),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
           topRight: Radius.circular(20),
           topLeft: Radius.circular(20),
@@ -157,10 +157,10 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
   }
 
   List<Tab> tabs = <Tab>[
-    Tab(
+    const Tab(
       text: "Course",
     ),
-    Tab(
+    const Tab(
       text: "Mentors",
     )
   ];
@@ -184,7 +184,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: 60, bottom: 20, left: 16, right: 16),
+        padding: const EdgeInsets.only(top: 60, bottom: 20, left: 16, right: 16),
         child: SingleChildScrollView(
           child: SizedBox(
             height: MediaQuery.of(context).size.height,
@@ -194,17 +194,17 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                 Row(
                   children: [
                     IconButton(
-                        constraints: BoxConstraints(),
-                        padding: EdgeInsets.only(right: 20),
+                        constraints: const BoxConstraints(),
+                        padding: const EdgeInsets.only(right: 20),
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back,
                           color: Colors.black,
                         )),
                     Expanded(
-                      child: Container(
+                      child: SizedBox(
                         height: 50,
                         width: 50,
                         child: Form(
@@ -237,15 +237,15 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                             focusNode: _textFormFieldFocuseNode,
                             autofocus: true,
                             decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
+                                enabledBorder: const OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10)),
                                     borderSide: BorderSide(
                                         color: Color(0xFFD1D1D1), width: 1)),
                                 filled: true,
-                                fillColor: Color(0xFFF9F9F9),
-                                focusColor: Color(0xFF6F30C0),
-                                focusedBorder: OutlineInputBorder(
+                                fillColor: const Color(0xFFF9F9F9),
+                                focusColor: const Color(0xFF6F30C0),
+                                focusedBorder: const OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10)),
                                     borderSide: BorderSide(
@@ -254,36 +254,36 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10),
                                   child: ImageIcon(
-                                    AssetImage("assets/images/search_icon.png"),
+                                    const AssetImage("assets/images/search_icon.png"),
                                     color: _textFormFieldFocuseNode.hasFocus
-                                        ? Color(0xFF6F30C0)
-                                        : Color(0xFF979797),
+                                        ? const Color(0xFF6F30C0)
+                                        : const Color(0xFF979797),
                                   ),
                                 ),
                                 prefixIconConstraints:
-                                    BoxConstraints(maxWidth: 45, maxHeight: 45),
+                                    const BoxConstraints(maxWidth: 45, maxHeight: 45),
                                 contentPadding:
-                                    EdgeInsets.symmetric(vertical: 0),
+                                    const EdgeInsets.symmetric(vertical: 0),
                                 suffixIcon: IconButton(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                     horizontal: 11,
                                   ),
-                                  constraints: BoxConstraints(),
+                                  constraints: const BoxConstraints(),
                                   onPressed: () {
                                     showSheet(context);
                                   },
-                                  icon: ImageIcon(
+                                  icon: const ImageIcon(
                                     AssetImage("assets/images/filter_icon.png"),
                                     color: Color(0xFF6F30C0),
                                     size: 20,
                                   ),
                                 ),
                                 hintText: "Search Anything",
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     color: Color(0xFF979797),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400)),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w400),
                           ),
                         ),
@@ -295,31 +295,31 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                     ? Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(top: 12),
+                            margin: const EdgeInsets.only(top: 12),
                             child: TabBar(
                               controller: _tabController,
                               tabs: tabs,
-                              unselectedLabelColor: Color(0xFFD1D1D1),
-                              labelStyle: TextStyle(
+                              unselectedLabelColor: const Color(0xFFD1D1D1),
+                              labelStyle: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16),
                               indicatorPadding:
-                                  EdgeInsets.symmetric(horizontal: 10),
-                              indicator: BoxDecoration(
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              indicator: const BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(50)),
                                   color: Color(0xFF6F30C0)),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 14),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 14),
                             child: Divider(
                               thickness: 1,
                               color: Color(0xFFD1D1D1),
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             height: MediaQuery.of(context).size.height - 140,
                             width: MediaQuery.of(context).size.width - 32,
                             child: TabBarView(
@@ -331,7 +331,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                           )
                         ],
                       )
-                    : Container(
+                    : SizedBox(
                         height: MediaQuery.of(context).size.height - 50,
                         width: MediaQuery.of(context).size.width - 16,
                         child: Column(
@@ -339,7 +339,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   "Recent",
                                   style: TextStyle(
                                       color: Colors.black,
@@ -354,7 +354,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                                       getRecentSearch();
                                     });
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "Clear all",
                                     style: TextStyle(
                                         color: Color(0xFF6F30C0),
@@ -364,8 +364,8 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                                 )
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 7),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 7),
                               child: Divider(
                                 thickness: 1,
                                 color: Color(0xFFD1D1D1),
@@ -396,14 +396,14 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
     return searchedCourseList != []
         ? _courseListView(searchedCourseList)
         // ? Text("data")
-        : Center(
+        : const Center(
             child: Text("No results found"),
           );
   }
 
   _courseListView(searchedCourseList) {
     return ListView.builder(
-        padding: EdgeInsets.symmetric(vertical: 18),
+        padding: const EdgeInsets.symmetric(vertical: 18),
         itemCount: searchedCourseList.length,
         itemBuilder: (context, index) {
           return courseListTile(searchedCourseList[index]);
@@ -416,10 +416,10 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
         FocusScope.of(context).requestFocus(FocusNode());
         Navigator.push(context, MaterialPageRoute(builder: (context)=>CourseDetailPage(course: course, bookmarkedCourse: bookmarkedCourse)));
       },
-      borderRadius: BorderRadius.all(Radius.circular(14)),
+      borderRadius: const BorderRadius.all(Radius.circular(14)),
       child: Container(
-        padding: EdgeInsets.all(12),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(12),
+        decoration: const BoxDecoration(
             color: Color(0xFFF9F9F9),
             borderRadius: BorderRadius.all(Radius.circular(14))),
         child: Row(
@@ -429,7 +429,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
             Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
                   child: Image(
                     image: AssetImage(course.image),
                     height: 110,
@@ -438,7 +438,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.5,
-                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   height: 110,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -446,19 +446,19 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                     children: [
                       Container(
                         padding:
-                            EdgeInsets.symmetric(vertical: 3, horizontal: 10),
-                        decoration: BoxDecoration(
+                            const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                        decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(Radius.circular(50))),
                         child: Text(
                           course.category,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Color(0xFF6F30C0),
                               fontSize: 10,
                               fontWeight: FontWeight.w400),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 50,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -466,7 +466,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                             Flexible(
                               child: Text(
                                 course.courseName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 16),
@@ -474,7 +474,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                             ),
                             Text(
                               "\$${course.price}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color(0xFF6F30C0),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400),
@@ -492,8 +492,8 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                             allowHalfRating: true,
                             itemCount: 1,
                             itemSize: 16,
-                            itemPadding: EdgeInsets.only(right: 6),
-                            itemBuilder: (context, _) => Icon(
+                            itemPadding: const EdgeInsets.only(right: 6),
+                            itemBuilder: (context, _) => const Icon(
                               Icons.star,
                               color: Color(0xFFFFC90C),
                             ),
@@ -501,19 +501,19 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                           ),
                           Text(
                             course.ratting.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color(0xFF979797),
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12),
                           ),
                           Container(
-                              margin: EdgeInsets.symmetric(horizontal: 5),
-                              color: Color(0xFFD1D1D1),
+                              margin: const EdgeInsets.symmetric(horizontal: 5),
+                              color: const Color(0xFFD1D1D1),
                               height: 14,
                               width: 1),
                           Text(
-                            course.enrolledStudent.toString() + " Student",
-                            style: TextStyle(
+                            "${course.enrolledStudent} Student",
+                            style: const TextStyle(
                                 color: Color(0xFF979797),
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12),
@@ -527,24 +527,24 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
             ),
             IconButton(
                 onPressed: () {
-                  if (bookmarkedCourse!.contains(course.docId)) {
+                  if (bookmarkedCourse.contains(course.docId)) {
                     setState(() {
-                      bookmarkedCourse!.remove(course.docId);
+                      bookmarkedCourse.remove(course.docId);
                     });
                   } else {
                     setState(() {
-                      bookmarkedCourse!.add(course.docId);
+                      bookmarkedCourse.add(course.docId);
                     });
                   }
                 },
                 padding: EdgeInsets.zero,
-                constraints: BoxConstraints(),
+                constraints: const BoxConstraints(),
                 splashColor: Colors.transparent,
                 icon: ImageIcon(
-                  AssetImage("assets/images/bookmark_outlined_icon.png"),
-                  color: bookmarkedCourse!.contains(course.docId)
-                      ? Color(0xFF6F30C0)
-                      : Color(0xFFD1D1D1),
+                  const AssetImage("assets/images/bookmark_outlined_icon.png"),
+                  color: bookmarkedCourse.contains(course.docId)
+                      ? const Color(0xFF6F30C0)
+                      : const Color(0xFFD1D1D1),
                 ))
           ],
         ),
@@ -555,14 +555,14 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
   SearchedMentorPage() {
     return searchedMentorList != []
         ? _MentorListView(searchedMentorList)
-        : Center(
+        : const Center(
             child: Text("No results found"),
           );
   }
 
   _MentorListView(searchedMentorList) {
     return ListView.builder(
-        padding: EdgeInsets.symmetric(vertical: 18),
+        padding: const EdgeInsets.symmetric(vertical: 18),
         itemCount: searchedMentorList.length,
         itemBuilder: (context, index) {
           return mentorListTile(searchedMentorList[index]);
@@ -571,9 +571,9 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
 
   mentorListTile(Userbase mentor) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 4),
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.all(8),
+      decoration: const BoxDecoration(
           color: Color(0xFFF9F9F9),
           borderRadius: BorderRadius.all(Radius.circular(40))),
       child: Row(
@@ -592,14 +592,14 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                   children: [
                     Text(
                       mentor.name.toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
                     Text(
                       mentor.about.toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xFF979797),
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
@@ -617,7 +617,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                         builder: (context) =>
                             ChattingPage(receiverUser: mentor.toMap())));
               },
-              icon: ImageIcon(
+              icon: const ImageIcon(
                 AssetImage("assets/images/message_text_icon.png"),
                 color: Color(0xFF6F30C0),
                 size: 20,
@@ -648,7 +648,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
               padding: const EdgeInsets.symmetric(vertical: 11),
               child: Text(
                 recentSearchList[index],
-                style: TextStyle(
+                style: const TextStyle(
                     color: Color(0xFF979797),
                     fontSize: 14,
                     fontWeight: FontWeight.w400),
@@ -658,7 +658,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
         ),
         IconButton(
             padding: EdgeInsets.zero,
-            constraints: BoxConstraints(),
+            constraints: const BoxConstraints(),
             onPressed: () async {
               recentSearchList.removeAt(index);
               await addRecentSearch();
@@ -666,7 +666,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                 getRecentSearch();
               });
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.close,
               size: 18,
               color: Color(0xFF979797),
@@ -684,24 +684,24 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
           await refreshBloc.refreshData();
         },
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 4),
-          padding: EdgeInsets.symmetric(horizontal: 27),
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 27),
           decoration: BoxDecoration(
               color:
-                  filtterCategory == value ? Colors.white : Color(0xFFF9F9F9),
-              borderRadius: BorderRadius.all(Radius.circular(50)),
+                  filtterCategory == value ? Colors.white : const Color(0xFFF9F9F9),
+              borderRadius: const BorderRadius.all(Radius.circular(50)),
               border: Border.all(
                 color: filtterCategory == value
-                    ? Color(0xFF6F30C0)
-                    : Color(0xFFF9F9F9),
+                    ? const Color(0xFF6F30C0)
+                    : const Color(0xFFF9F9F9),
               )),
           child: Center(
             child: Text(
               text,
               style: TextStyle(
                   color: filtterCategory == value
-                      ? Color(0xFF6F30C0)
-                      : Color(0xFF4E4E4E),
+                      ? const Color(0xFF6F30C0)
+                      : const Color(0xFF4E4E4E),
                   fontWeight: FontWeight.w400,
                   fontSize: 12),
             ),
@@ -715,7 +715,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
       star.add(Icon(
         Icons.star,
         color:
-            index + 1 == filtterRatting ? Color(0xFFFFC90C) : Color(0xFF4E4E4E),
+            index + 1 == filtterRatting ? const Color(0xFFFFC90C) : const Color(0xFF4E4E4E),
         size: 18,
       ));
     }
@@ -727,17 +727,17 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
           await refreshBloc.refreshData();
         },
         child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 4),
-            padding: EdgeInsets.symmetric(horizontal: 27),
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 27),
             decoration: BoxDecoration(
                 color: index + 1 == filtterRatting
                     ? Colors.white
-                    : Color(0xFFF9F9F9),
-                borderRadius: BorderRadius.all(Radius.circular(50)),
+                    : const Color(0xFFF9F9F9),
+                borderRadius: const BorderRadius.all(Radius.circular(50)),
                 border: Border.all(
                   color: index + 1 == filtterRatting
-                      ? Color(0xFF6F30C0)
-                      : Color(0xFFF9F9F9),
+                      ? const Color(0xFF6F30C0)
+                      : const Color(0xFFF9F9F9),
                 )),
             child: Row(
               children: star,
@@ -749,22 +749,22 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
         stream: refreshBloc.refreshStream,
         builder: (context, snapshot) {
           return Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             height: 500,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.only(bottom: 18),
+                  margin: const EdgeInsets.only(bottom: 18),
                   height: 5,
                   width: 50,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Color(0xFFD1D1D1),
                       borderRadius: BorderRadius.all(Radius.circular(5))),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 18),
-                  child: Text(
+                  margin: const EdgeInsets.only(bottom: 18),
+                  child: const Text(
                     "Filter",
                     style: TextStyle(
                         color: Colors.black,
@@ -776,7 +776,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
+                    const Text(
                       "Category",
                       style: TextStyle(
                           color: Colors.black,
@@ -784,7 +784,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                           fontWeight: FontWeight.w600),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 12, bottom: 18),
+                      margin: const EdgeInsets.only(top: 12, bottom: 18),
                       height: 40,
                       width: MediaQuery.of(context).size.width,
                       child: ListView.builder(
@@ -802,7 +802,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
+                    const Text(
                       "Price",
                       style: TextStyle(
                           color: Colors.black,
@@ -810,30 +810,30 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                           fontWeight: FontWeight.w600),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 38, bottom: 24),
+                      margin: const EdgeInsets.only(top: 38, bottom: 24),
                       child: SliderTheme(
                         data: SliderTheme.of(context).copyWith(
                           trackHeight: 3,
-                          valueIndicatorColor: Color(0xFF6F30C0),
-                          inactiveTrackColor: Color(0xFF6F30C0),
+                          valueIndicatorColor: const Color(0xFF6F30C0),
+                          inactiveTrackColor: const Color(0xFF6F30C0),
                           activeTrackColor: Colors.white,
                           thumbColor: Colors.red,
-                          overlayColor: Color(0xFF6F30C0),
+                          overlayColor: const Color(0xFF6F30C0),
                           thumbShape:
-                              RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                              const RoundSliderThumbShape(enabledThumbRadius: 12.0),
                           overlayShape:
-                              RoundSliderOverlayShape(overlayRadius: 8.0),
+                              const RoundSliderOverlayShape(overlayRadius: 8.0),
                         ),
                         child: RangeSlider(
-                          activeColor: Color(0xFF6F30C0),
-                          inactiveColor: Color(0xFFD1D1D1),
+                          activeColor: const Color(0xFF6F30C0),
+                          inactiveColor: const Color(0xFFD1D1D1),
                           values: priceRange,
                           min: 0,
                           max: 500,
-                          divisions: (500 / 5).toInt(),
+                          divisions: 500 ~/ 5,
                           labels: RangeLabels(
-                              "\$" + priceRange.start.round().toString(),
-                              "\$" + priceRange.end.round().toString()),
+                              "\$${priceRange.start.round()}",
+                              "\$${priceRange.end.round()}"),
                           onChanged: (values) async {
                             setState(() {
                               priceRange = values;
@@ -849,7 +849,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
+                    const Text(
                       "Rating",
                       style: TextStyle(
                           color: Colors.black,
@@ -857,7 +857,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                           fontWeight: FontWeight.w600),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 12, bottom: 53),
+                      margin: const EdgeInsets.only(top: 12, bottom: 53),
                       height: 40,
                       width: MediaQuery.of(context).size.width,
                       child: ListView.builder(
@@ -875,11 +875,11 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                     Expanded(
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            backgroundColor: Color(0xFFF9F9F9),
+                            backgroundColor: const Color(0xFFF9F9F9),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(75),
                             ),
-                            side: BorderSide(
+                            side: const BorderSide(
                                 color: Colors.white,
                                 width: 1,
                                 style: BorderStyle.solid)),
@@ -892,8 +892,8 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                           await refreshBloc.refreshData();
                           // Navigator.pop(context);
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
                               vertical: 14, horizontal: 20),
                           child: Text(
                             "Reset",
@@ -905,14 +905,14 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 23,
                     ),
                     Expanded(
                       child: OutlinedButton(
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Color(0xFF6F30C0)),
+                              MaterialStateProperty.all(const Color(0xFF6F30C0)),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(75),
@@ -923,8 +923,8 @@ class _HomeSearchScreenState extends State<HomeSearchScreen>
                           searchFN(_searchFieldController.text);
                           Navigator.pop(context);
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
                               vertical: 14, horizontal: 20),
                           child: Text(
                             "Filter",

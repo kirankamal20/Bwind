@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyPage extends StatefulWidget {
-  PrivacyPolicyPage({super.key});
+  const PrivacyPolicyPage({super.key});
 
+  @override
   State<PrivacyPolicyPage> createState() => _PrivacyPolicyPageState();
 }
 
@@ -46,18 +46,18 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                       color: Colors.black,
                     )),
-                Text(
+                const Text(
                   "Privacy Policy",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
                       fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 0,
                   width: 35,
                 )
@@ -74,15 +74,15 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
 
   privacyPolicyListTile(index, title, description){
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 9),
+      margin: const EdgeInsets.symmetric(vertical: 9),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.only(bottom: 8),
+            margin: const EdgeInsets.only(bottom: 8),
             child: Text(
-              (index+1).toString() + " " + title,
-              style: TextStyle(
+              "${index+1} " + title,
+              style: const TextStyle(
                   color: Color(0xFF6F30C0),
                   fontWeight: FontWeight.w600,
                   fontSize: 16
@@ -91,7 +91,7 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
           ),Text(
            description,
             textAlign: TextAlign.justify,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Color(0xFF979797),
                 fontWeight: FontWeight.w400,
                 fontSize: 12
@@ -104,7 +104,7 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
 
   privacyPolicyListView(){
     return ListView.builder(
-      padding: EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 12),
         itemCount: privacyPolicyList.length,
         itemBuilder: (context, index){
           return privacyPolicyListTile(index, privacyPolicyList[index]['title'], privacyPolicyList[index]['description']);

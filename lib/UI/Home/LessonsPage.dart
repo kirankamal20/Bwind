@@ -6,7 +6,8 @@ class LessonsPage extends StatefulWidget{
   Map<String, dynamic> course;
   LessonsPage({super.key, required this.course});
 
-  State<LessonsPage> createState() => _LessonsPageState(this.course);
+  @override
+  State<LessonsPage> createState() => _LessonsPageState(course);
 }
 
 class _LessonsPageState extends State<LessonsPage>{
@@ -15,7 +16,7 @@ class _LessonsPageState extends State<LessonsPage>{
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text("Lessons"),
     );
   }

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'CouseList.dart';
 
 class CompletedCourse extends StatefulWidget {
-  CompletedCourse({super.key});
+  const CompletedCourse({super.key});
 
+  @override
   State<CompletedCourse> createState() => _CompletedCourseState();
 }
 

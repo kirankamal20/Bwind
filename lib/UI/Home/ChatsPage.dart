@@ -2,8 +2,9 @@ import 'package:bwind/UI/Home/ChattingPage.dart';
 import 'package:flutter/material.dart';
 
 class ChatsPage extends StatefulWidget {
-  ChatsPage({super.key});
+  const ChatsPage({super.key});
 
+  @override
   State<ChatsPage> createState() => _ChatsPageState();
 }
 
@@ -47,11 +48,11 @@ class _ChatsPageState extends State<ChatsPage> {
                       receiverUser: receiverUser,
                     )));
       },
-      borderRadius: BorderRadius.all(Radius.circular(40)),
+      borderRadius: const BorderRadius.all(Radius.circular(40)),
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4),
-        padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        padding: const EdgeInsets.all(8),
+        decoration: const BoxDecoration(
             color: Color(0xFFF9F9F9),
             borderRadius: BorderRadius.all(Radius.circular(40))),
         child: Row(
@@ -70,12 +71,12 @@ class _ChatsPageState extends State<ChatsPage> {
                     children: [
                       Text(
                         name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w600),
                       ),
-                      Text(
+                      const Text(
                         "Wow! this is really epic",
                         style: TextStyle(
                             color: Color(0xFF979797),
@@ -90,13 +91,13 @@ class _ChatsPageState extends State<ChatsPage> {
             Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(bottom: 6),
+                  margin: const EdgeInsets.only(bottom: 6),
                   height: 22,
                   width: 22,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Color(0xFF6F30C0),
                       borderRadius: BorderRadius.all(Radius.circular(50))),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       "1",
                       style: TextStyle(
@@ -106,7 +107,7 @@ class _ChatsPageState extends State<ChatsPage> {
                     ),
                   ),
                 ),
-                Text(
+                const Text(
                   "13:55",
                   style: TextStyle(
                       color: Color(0xFF979797),

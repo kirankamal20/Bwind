@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LanguagePage extends StatefulWidget {
-  LanguagePage({super.key});
+  const LanguagePage({super.key});
 
+  @override
   State<LanguagePage> createState() => _LanguagePageState();
 }
 
@@ -30,18 +30,18 @@ class _LanguagePageState extends State<LanguagePage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                       color: Colors.black,
                     )),
-                Text(
+                const Text(
                   "Language",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
                       fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 0,
                   width: 35,
                 )
@@ -49,7 +49,7 @@ class _LanguagePageState extends State<LanguagePage> {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 7),
+                padding: const EdgeInsets.symmetric(vertical: 7),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -102,10 +102,10 @@ class _LanguagePageState extends State<LanguagePage> {
 
   languageTile(title, value, groupValue, void Function(dynamic)? onChange) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 9),
+      margin: const EdgeInsets.symmetric(vertical: 9),
       child: Container(
-        padding: EdgeInsets.all(14),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(14),
+        decoration: const BoxDecoration(
             color: Color(0xFFF9F9F9),
             borderRadius: BorderRadius.all(Radius.circular(16))),
         child: Row(
@@ -113,7 +113,7 @@ class _LanguagePageState extends State<LanguagePage> {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xFF4E4E4E),
                   fontSize: 16,
                   fontWeight: FontWeight.w600),

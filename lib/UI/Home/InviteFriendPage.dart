@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class InviteFriendPage extends StatefulWidget {
-  InviteFriendPage({super.key});
+  const InviteFriendPage({super.key});
 
+  @override
   State<InviteFriendPage> createState() => _InviteFriendPageState();
 }
 
@@ -85,18 +85,18 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.black,
                       )),
-                  Text(
+                  const Text(
                     "Invite Friends",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 25,
                         fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 0,
                     width: 35,
                   )
@@ -104,7 +104,7 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: ContactsListView(),
                 ),
               ),
@@ -113,9 +113,9 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
 
   contactsListTile(image, name, number, bool isInvited) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 4),
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.all(8),
+      decoration: const BoxDecoration(
           color: Color(0xFFF9F9F9),
           borderRadius: BorderRadius.all(Radius.circular(40))),
       child: Row(
@@ -134,14 +134,14 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
                   children: [
                     Text(
                       name,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
                     Text(
                       number.toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Color(0xFF979797),
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
@@ -155,11 +155,11 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
               ? InkWell(
                   onTap: () {},
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 1, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(27)),
-                        border: Border.all(color: Color(0xFF6F30C0), width: 1)),
-                    child: Text(
+                        borderRadius: const BorderRadius.all(Radius.circular(27)),
+                        border: Border.all(color: const Color(0xFF6F30C0), width: 1)),
+                    child: const Text(
                       "Invited",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -170,12 +170,12 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
                   ),
                 )
               : Container(
-                  padding: EdgeInsets.symmetric(vertical: 1, horizontal: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
                   decoration: BoxDecoration(
-                      color: Color(0xFF6F30C0),
-                      borderRadius: BorderRadius.all(Radius.circular(27)),
-                      border: Border.all(color: Color(0xFF6F30C0), width: 1)),
-                  child: Text(
+                      color: const Color(0xFF6F30C0),
+                      borderRadius: const BorderRadius.all(Radius.circular(27)),
+                      border: Border.all(color: const Color(0xFF6F30C0), width: 1)),
+                  child: const Text(
                     "Invite",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -191,7 +191,7 @@ class _InviteFriendPageState extends State<InviteFriendPage> {
 
   ContactsListView() {
     return ListView.builder(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         itemCount: contactsList.length,
         itemBuilder: (context, index) {
           return contactsListTile(

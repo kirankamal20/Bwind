@@ -1,23 +1,23 @@
 import 'package:bwind/Model/PaymentCard.dart';
 import 'package:bwind/Model/FireAuth.dart';
 import 'package:bwind/Model/Userbase.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../Validator.dart';
+import '../../validator.dart';
 
 class AddNewCardPage extends StatefulWidget {
-  AddNewCardPage({super.key});
+  const AddNewCardPage({super.key});
 
+  @override
   State<AddNewCardPage> createState() => _AddNewCardPageState();
 }
 
 class _AddNewCardPageState extends State<AddNewCardPage> {
 
-  GlobalKey<FormState> _cardForm = GlobalKey();
+  final GlobalKey<FormState> _cardForm = GlobalKey();
 
   final _cardHolderNameController = TextEditingController();
   final _cardNumberController = TextEditingController();
@@ -61,18 +61,18 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                       FocusScope.of(context).requestFocus(FocusNode());
                       Navigator.pop(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                       color: Colors.black,
                     )),
-                Text(
+                const Text(
                   "Add New Card",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
                       fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 0,
                   width: 35,
                 )
@@ -90,8 +90,8 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(top: 15, bottom: 4),
-                            child: Text(
+                            margin: const EdgeInsets.only(top: 15, bottom: 4),
+                            child: const Text(
                               "Card Holder Name",
                               style: TextStyle(
                                   color: Color(0xFF4E4E4E),
@@ -105,24 +105,24 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                               return Validator.validateCardHolderName(cardHolderName: value!);
                             },
                             decoration: InputDecoration(
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 color: Color(0xFF979797)
                               ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       color: Color(0xFFD1D1D1), width: 1),
                                 ),
                                 contentPadding:
-                                EdgeInsets.symmetric(vertical: 13, horizontal: 11),
+                                const EdgeInsets.symmetric(vertical: 13, horizontal: 11),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       color: Color(0xFF6F30C0), width: 1),
                                 ),
                                 hintText: "Name"
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color(0xFF979797),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400),
@@ -134,8 +134,8 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(top: 15, bottom: 4),
-                            child: Text(
+                            margin: const EdgeInsets.only(top: 15, bottom: 4),
+                            child: const Text(
                               "Card Number",
                               style: TextStyle(
                                   color: Color(0xFF4E4E4E),
@@ -150,24 +150,24 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                               return Validator.validateCardNumber(cardNumber: value!);
                             },
                             decoration: InputDecoration(
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 color: Color(0xFF979797)
                               ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       color: Color(0xFFD1D1D1), width: 1),
                                 ),
                                 contentPadding:
-                                EdgeInsets.symmetric(vertical: 13, horizontal: 11),
+                                const EdgeInsets.symmetric(vertical: 13, horizontal: 11),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       color: Color(0xFF6F30C0), width: 1),
                                 ),
                                 hintText: "1234 1234 1234 1234"
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color(0xFF979797),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400),
@@ -182,8 +182,8 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(top: 15, bottom: 4),
-                                child: Text(
+                                margin: const EdgeInsets.only(top: 15, bottom: 4),
+                                child: const Text(
                                   "Expiry Date",
                                   style: TextStyle(
                                       color: Color(0xFF4E4E4E),
@@ -200,23 +200,23 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                                     return Validator.validateCerdExpiry(expiryDate: value!);
                                   },
                                   decoration: InputDecoration(
-                                    hintStyle: TextStyle(
+                                    hintStyle: const TextStyle(
                                       color: Color(0xFF979797)
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
                                       borderSide:
-                                      BorderSide(color: Color(0xFFD1D1D1), width: 1),
+                                      const BorderSide(color: Color(0xFFD1D1D1), width: 1),
                                     ),
                                     contentPadding:
-                                    EdgeInsets.symmetric(vertical: 13, horizontal: 11),
+                                    const EdgeInsets.symmetric(vertical: 13, horizontal: 11),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
                                       borderSide:
-                                      BorderSide(color: Color(0xFF6F30C0), width: 1),
+                                      const BorderSide(color: Color(0xFF6F30C0), width: 1),
                                     ),
                                     hintText: "mm/yyyy",
-                                    suffixIcon:  Icon(
+                                    suffixIcon:  const Icon(
                                         Icons.calendar_month,
                                         color: Color(0xFF6F30C0)
                                     ),
@@ -227,10 +227,10 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                                         context: context,
                                         initialDate: DateTime.now(),
                                         firstDate: DateTime.now(),
-                                        lastDate: DateTime.now().add(Duration(days: 18262)));
-                                    _cardExpiryDateController.text = pickedDate!.month.toString() + "/" + pickedDate!.year.toString();
+                                        lastDate: DateTime.now().add(const Duration(days: 18262)));
+                                    _cardExpiryDateController.text = "${pickedDate!.month}/${pickedDate!.year}";
                                   },
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Color(0xFF979797),
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400
@@ -239,14 +239,14 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                               ),
                             ],
                           ),
-                          SizedBox(width: 18,),
+                          const SizedBox(width: 18,),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(top: 15, bottom: 4),
-                                child: Text(
+                                margin: const EdgeInsets.only(top: 15, bottom: 4),
+                                child: const Text(
                                   "CVV",
                                   style: TextStyle(
                                       color: Color(0xFF4E4E4E),
@@ -264,24 +264,24 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                                     return Validator.validateCVV(CVV: value!);
                                   },
                                   decoration: InputDecoration(
-                                      hintStyle: TextStyle(
+                                      hintStyle: const TextStyle(
                                           color: Color(0xFF979797)
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Color(0xFFD1D1D1), width: 1),
                                       ),
                                       contentPadding:
-                                      EdgeInsets.symmetric(vertical: 13, horizontal: 11),
+                                      const EdgeInsets.symmetric(vertical: 13, horizontal: 11),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Color(0xFF6F30C0), width: 1),
                                       ),
                                       hintText: "CVV"
                                   ),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Color(0xFF979797),
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400),
@@ -292,7 +292,7 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 100,)
+                      const SizedBox(height: 100,)
                     ],
                   ),
                 ),
@@ -306,7 +306,7 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
             bottom: 20,
             width: MediaQuery.of(context).size.width - 32,
             child: InkWell(
-              borderRadius: BorderRadius.all(Radius.circular(50)),
+              borderRadius: const BorderRadius.all(Radius.circular(50)),
               onTap: () async {
                 if(_cardForm.currentState!.validate()){
                   FocusScope.of(context).requestFocus(FocusNode());
@@ -317,7 +317,7 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                   CardResponse response = await Userbase.addCard(FireAuth.auth.currentUser!.uid,newcard.toMap());
                   setState(() {
                     isAdding = false;
-                  });;
+                  });
                   Fluttertoast.showToast(
                       msg: response.msg,
                     toastLength: Toast.LENGTH_SHORT,
@@ -329,9 +329,9 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                 }
               },
               child: Container(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                       vertical: 18.0),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(50)),
                       color: Color(0xFF6F30C0),
                       boxShadow: [
@@ -340,12 +340,12 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                   ),
                   child: Center(
                     child: isAdding ?
-                    SizedBox(
+                    const SizedBox(
                       height: 24,
                       width: 24,
                       child: CircularProgressIndicator(color: Colors.white,),
                     )
-                        :Text(
+                        :const Text(
                       "Add New Card",
                       style: TextStyle(
                           color: Colors.white,
