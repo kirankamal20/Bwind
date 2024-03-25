@@ -26,16 +26,13 @@ class _HomePageState extends State<HomePage> {
 
   List<Map<String, String>> mostPopulerCourseList = [
     {"category_name": "All", "image": "assets/images/populer_couse_image.png"},
-    {"category_name": "Design", "image": "assets/images/category1.png"},
-    {
-      "category_name": "Programming",
-      "image": "assets/images/populer_couse_image.png"
-    },
-    {"category_name": "Modeling", "image": "assets/images/category1.png"},
-    {
-      "category_name": "Game Design",
-      "image": "assets/images/populer_couse_image.png"
-    },
+    {"category_name": "MCA", "image": "assets/images/category1.png"},
+    {"category_name": "MBA", "image": "assets/images/populer_couse_image.png"},
+    {"category_name": "B-Tech", "image": "assets/images/category1.png"},
+    // {
+    //   "category_name": "Game Design",
+    //   "image": "assets/images/populer_couse_image.png"
+    // },
   ];
 
   User? _currentUser;
@@ -71,7 +68,8 @@ class _HomePageState extends State<HomePage> {
         children: [
           Container(
             height: 230,
-            padding: const EdgeInsets.only(top: 60, bottom: 20, left: 16, right: 16),
+            padding:
+                const EdgeInsets.only(top: 60, bottom: 20, left: 16, right: 16),
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/images/homepage_appbar_bg.png"),
@@ -140,8 +138,7 @@ class _HomePageState extends State<HomePage> {
                               height: 45,
                               width: 45,
                               child: Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 10),
+                                padding: EdgeInsets.symmetric(horizontal: 10),
                                 child: ImageIcon(
                                   AssetImage("assets/images/search_icon.png"),
                                   color: Color(0xFFD1D1D1),
@@ -170,37 +167,40 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 28),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 170,
-                  width: MediaQuery.of(context).size.width - 32,
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(18)),
-                    child: PageView.builder(
-                        itemCount: 3,
-                        controller: _pageController,
-                        onPageChanged: (int page) {
-                          setState(() {
-                            _currentPage = page;
-                          });
-                        },
-                        itemBuilder: (context, index) {
-                          return pageViewTile();
-                        }),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 11),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: dots,
-                  ),
-                )
-              ],
-            ),
+          // Container(
+          //   margin: const EdgeInsets.only(top: 28),
+          //   child: Column(
+          //     children: [
+          //       SizedBox(
+          //         height: 170,
+          //         width: MediaQuery.of(context).size.width - 32,
+          //         child: ClipRRect(
+          //           borderRadius: const BorderRadius.all(Radius.circular(18)),
+          //           child: PageView.builder(
+          //               itemCount: 3,
+          //               controller: _pageController,
+          //               onPageChanged: (int page) {
+          //                 setState(() {
+          //                   _currentPage = page;
+          //                 });
+          //               },
+          //               itemBuilder: (context, index) {
+          //                 return pageViewTile();
+          //               }),
+          //         ),
+          //       ),
+          //       Container(
+          //         margin: const EdgeInsets.only(top: 11),
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           children: dots,
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,
           ),
           Container(
             child: Column(
@@ -226,8 +226,8 @@ class _HomePageState extends State<HomePage> {
                                           fontWeight: FontWeight.w600),
                                     ),
                                     const Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 3),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 3),
                                       child: ImageIcon(
                                         AssetImage(
                                           "assets/images/right_arrow_icon.png",
@@ -252,6 +252,9 @@ class _HomePageState extends State<HomePage> {
                     ))
               ],
             ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.2,
           ),
           Container(
             child: Column(
@@ -278,8 +281,8 @@ class _HomePageState extends State<HomePage> {
                                           fontWeight: FontWeight.w600),
                                     ),
                                     const Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 3),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 3),
                                       child: ImageIcon(
                                         AssetImage(
                                           "assets/images/right_arrow_icon.png",
