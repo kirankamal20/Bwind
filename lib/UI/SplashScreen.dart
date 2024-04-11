@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:bwind/UI/AppInfo/AppInfoScreen.dart';
 import 'package:bwind/UI/Home/HomeScreen.dart';
 import 'package:bwind/UI/Login/LoginOrSignupScreen.dart';
+import 'package:bwind/shared/extension/anotted_region_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -43,30 +45,31 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          color: Colors.white,
-          child: Center(
-            child: Image.asset(
-              'assets/images/app_logo.jpg',
-              height: 300,
-              width: 200,
-            ),
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        color: Colors.white,
+        child: Center(
+          child: Image.asset(
+            'assets/images/app_logo.jpg',
+            height: 300,
+            width: 200,
+          ),
 
-            // Stack(
-            //     children: [
-            //       Image.asset('assets/images/app_logo.jpg'),
-            //       Positioned(
-            //         top: 28,
-            //           child: Image.asset('assets/images/bwind_icon_box.png')
-            //       ),
-            //       Positioned(
-            //         left: 5,
-            //           child: Image.asset('assets/images/bwind_icon_arrow.png')
-            //       )
-            //     ]
-            // )
-          )),
+          // Stack(
+          //     children: [
+          //       Image.asset('assets/images/app_logo.jpg'),
+          //       Positioned(
+          //         top: 28,
+          //           child: Image.asset('assets/images/bwind_icon_box.png')
+          //       ),
+          //       Positioned(
+          //         left: 5,
+          //           child: Image.asset('assets/images/bwind_icon_arrow.png')
+          //       )
+          //     ]
+          // )
+        ),
+      ).anottedRegion(),
     );
   }
 }

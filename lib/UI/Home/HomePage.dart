@@ -1,18 +1,28 @@
 import 'package:bwind/Model/FireAuth.dart';
 import 'package:bwind/UI/Home/HomeSearchScreen.dart';
+import 'package:bwind/UI/chat/chat_page.dart';
+import 'package:bwind/UI/chat/provider/chat_bot_provider.dart';
+import 'package:bwind/UI/chat/provider/message_provider.dart';
+import 'package:bwind/core/config/type_of_bot.dart';
+import 'package:bwind/data/hive/model/chat_bot/chat_bot.dart';
+import 'package:bwind/shared/extension/anotted_region_ext.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uuid/uuid.dart';
 import '../../translates/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   final PageController _pageController = PageController();
 
   List<Map<String, String>> topMentorsList = [
@@ -37,11 +47,16 @@ class _HomePageState extends State<HomePage> {
 
   User? _currentUser;
   int? _currentPage;
+  final uuid = const Uuid();
+
+  final bool _isBuildingChatBot = false;
+  String currentState = '';
 
   @override
   void initState() {
     _currentUser = FireAuth.auth.currentUser;
     _currentPage = 0;
+    ref.read(chatBotListProvider.notifier).fetchChatBots();
     super.initState();
   }
 
@@ -129,11 +144,11 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               height: 45,
                               width: 45,
@@ -152,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.w400)),
                           ],
                         ),
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.symmetric(horizontal: 11),
                           child: ImageIcon(
                             AssetImage('assets/images/filter_icon.png'),
@@ -166,6 +181,66 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: ElevatedButton(
+                onPressed: () async {
+                  // final result = await FilePicker.platform.pickFiles(
+                  //   type: FileType.custom,
+                  //   allowedExtensions: ['pdf'],
+                  // );
+                  // if (result != null) {
+                  //   final filePath = result.files.single.path;
+                  //   setState(() {
+                  //     _isBuildingChatBot = true;
+                  //     currentState = 'Extracting data';
+                  //   });
+
+                  //   await Future<void>.delayed(
+                  //     const Duration(milliseconds: 100),
+                  //   );
+
+                  //   final textChunks = await ref
+                  //       .read(chatBotListProvider.notifier)
+                  //       .getChunksFromPDF(filePath!);
+
+                  //   setState(() {
+                  //     currentState = 'Building chatBot';
+                  //   });
+
+                  // final embeddingsMap = await ref
+                  //     .read(chatBotListProvider.notifier)
+                  //     .batchEmbedChunks(textChunks);
+
+                  // final chatBot = ChatBot(
+                  //   messagesList: [],
+                  //   id: uuid.v4(),
+                  //   title: '',
+                  //   typeOfBot: TypeOfBot.pdf,
+                  //   attachmentPath: filePath,
+                  //   embeddings: embeddingsMap,
+                  // );
+
+                  // await ref
+                  //     .read(chatBotListProvider.notifier)
+                  //     .saveChatBot(chatBot);
+                  // await ref
+                  //     .read(messageListProvider.notifier)
+                  //     .updateChatBot(chatBot);
+
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ChatPage(),
+                      ));
+                  // setState(() {
+                  //   _isBuildingChatBot = false;
+                  // });
+                  // }
+                },
+                child: const Text("Pdf Summarize")),
           ),
           // Container(
           //   margin: const EdgeInsets.only(top: 28),
@@ -199,9 +274,7 @@ class _HomePageState extends State<HomePage> {
           //     ],
           //   ),
           // ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
-          ),
+
           Container(
             child: Column(
               children: [
@@ -254,7 +327,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: MediaQuery.of(context).size.height * 0.12,
           ),
           Container(
             child: Column(
@@ -310,7 +383,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-    );
+    ).anottedRegion(statusBarIconBrightness: Brightness.light);
   }
 
   Widget pageViewTile() {
@@ -322,7 +395,7 @@ class _HomePageState extends State<HomePage> {
               image: AssetImage("assets/images/home_pageview_bg design.png"),
               fit: BoxFit.cover),
         ),
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -332,7 +405,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       "40% OFF",
                       style: TextStyle(
@@ -349,7 +422,7 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
-                const Text(
+                Text(
                   "40%",
                   style: TextStyle(
                       color: Colors.white,
@@ -359,10 +432,10 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
+              padding: EdgeInsets.only(bottom: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     "Get a discount for every course order!",
                     style: TextStyle(

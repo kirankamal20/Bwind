@@ -1,3 +1,4 @@
+import 'package:bwind/shared/extension/anotted_region_ext.dart';
 import 'package:flutter/material.dart';
 
 import 'BookMarkPage.dart';
@@ -69,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen>
                         : "assets/images/profile_filled_icon.png"))),
               ],
               indicatorColor: const Color(0xFF6F30C0),
-              indicatorPadding: const EdgeInsets.symmetric(horizontal: 25),
+              // indicatorPadding: const EdgeInsets.symmetric(horizontal: 25),
               unselectedLabelColor: const Color(0xFFD1D1D1),
               labelColor: const Color(0xFF6F30C0),
             ),
@@ -77,12 +78,12 @@ class _HomeScreenState extends State<HomeScreen>
         ),
         body: TabBarView(
           controller: _tabController,
-          children: const [
-            HomePage(),
-            MyCoursePage(),
-            BookMarkPage(),
-            InboxPage(),
-            ProfilePage()
+          children: [
+            const HomePage(),
+            const MyCoursePage().anottedRegion(),
+            const BookMarkPage().anottedRegion(),
+            const InboxPage().anottedRegion(),
+            const ProfilePage().anottedRegion()
           ],
         ),
       ),
