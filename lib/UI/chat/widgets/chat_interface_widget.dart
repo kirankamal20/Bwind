@@ -54,7 +54,7 @@ class ChatInterfaceWidget extends ConsumerWidget {
                     ],
                   )
                 : ElevatedButton.icon(
-                    icon: const Icon(Icons.upload),
+                    icon: const Icon(Icons.picture_as_pdf),
                     onPressed: () async {
                       uploadPdf();
                     },
@@ -90,12 +90,12 @@ class ChatInterfaceWidget extends ConsumerWidget {
           primaryColor: context.colorScheme.onSurface,
           secondaryColor: Colors.grey.shade300,
           inputBackgroundColor: const Color(0xFF6F30C0),
-          inputTextCursorColor: context.colorScheme.onSurface,
+          inputTextCursorColor: Colors.white,
           attachmentButtonIcon: const Icon(
             Icons.upload,
             color: Colors.white,
           ),
-          inputContainerDecoration: const BoxDecoration(),
+          inputTextColor: Colors.white,
           receivedMessageBodyTextStyle: TextStyle(
             color: context.colorScheme.onBackground,
             fontSize: 16,
@@ -126,8 +126,11 @@ class ChatInterfaceWidget extends ConsumerWidget {
             isCollapsed: true,
             fillColor: context.colorScheme.onBackground,
           ),
-          inputBorderRadius: const BorderRadius.vertical(
-            top: Radius.circular(20),
+          inputBorderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
           ),
           inputMargin: const EdgeInsets.all(4),
           inputPadding: const EdgeInsets.all(20)),

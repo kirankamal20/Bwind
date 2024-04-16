@@ -43,6 +43,7 @@ dependencies:
   path_provider: ^2.1.2
   pretty_animated_buttons: ^0.0.1
   riverpod_annotation: ^2.3.4
+  sentry_flutter: ^7.19.0
   shared_preferences: null
   syncfusion_flutter_pdf: ^24.2.4
   syncfusion_flutter_pdfviewer: ^24.2.5

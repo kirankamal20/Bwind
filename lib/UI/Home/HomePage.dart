@@ -3,6 +3,7 @@ import 'package:bwind/UI/Home/HomeSearchScreen.dart';
 import 'package:bwind/UI/chat/chat_page.dart';
 import 'package:bwind/UI/chat/provider/chat_bot_provider.dart';
 import 'package:bwind/UI/chat/provider/message_provider.dart';
+import 'package:bwind/UI/quizz/quizz_screen.dart';
 import 'package:bwind/core/config/type_of_bot.dart';
 import 'package:bwind/data/hive/model/chat_bot/chat_bot.dart';
 import 'package:bwind/shared/extension/anotted_region_ext.dart';
@@ -39,10 +40,6 @@ class _HomePageState extends ConsumerState<HomePage> {
     {"category_name": "MCA", "image": "assets/images/category1.png"},
     {"category_name": "MBA", "image": "assets/images/populer_couse_image.png"},
     {"category_name": "B-Tech", "image": "assets/images/category1.png"},
-    // {
-    //   "category_name": "Game Design",
-    //   "image": "assets/images/populer_couse_image.png"
-    // },
   ];
 
   User? _currentUser;
@@ -182,99 +179,33 @@ class _HomePageState extends ConsumerState<HomePage> {
               ],
             ),
           ),
-
           Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: ElevatedButton(
-                onPressed: () async {
-                  // final result = await FilePicker.platform.pickFiles(
-                  //   type: FileType.custom,
-                  //   allowedExtensions: ['pdf'],
-                  // );
-                  // if (result != null) {
-                  //   final filePath = result.files.single.path;
-                  //   setState(() {
-                  //     _isBuildingChatBot = true;
-                  //     currentState = 'Extracting data';
-                  //   });
-
-                  //   await Future<void>.delayed(
-                  //     const Duration(milliseconds: 100),
-                  //   );
-
-                  //   final textChunks = await ref
-                  //       .read(chatBotListProvider.notifier)
-                  //       .getChunksFromPDF(filePath!);
-
-                  //   setState(() {
-                  //     currentState = 'Building chatBot';
-                  //   });
-
-                  // final embeddingsMap = await ref
-                  //     .read(chatBotListProvider.notifier)
-                  //     .batchEmbedChunks(textChunks);
-
-                  // final chatBot = ChatBot(
-                  //   messagesList: [],
-                  //   id: uuid.v4(),
-                  //   title: '',
-                  //   typeOfBot: TypeOfBot.pdf,
-                  //   attachmentPath: filePath,
-                  //   embeddings: embeddingsMap,
-                  // );
-
-                  // await ref
-                  //     .read(chatBotListProvider.notifier)
-                  //     .saveChatBot(chatBot);
-                  // await ref
-                  //     .read(messageListProvider.notifier)
-                  //     .updateChatBot(chatBot);
-
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ChatPage(),
-                      ));
-                  // setState(() {
-                  //   _isBuildingChatBot = false;
-                  // });
-                  // }
-                },
-                child: const Text("Pdf Summarize")),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ChatPage(),
+                          ));
+                    },
+                    child: const Text("Pdf Summarize")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const QuizzPage(),
+                          ));
+                    },
+                    child: const Text("Quizz")),
+              ],
+            ),
           ),
-          // Container(
-          //   margin: const EdgeInsets.only(top: 28),
-          //   child: Column(
-          //     children: [
-          //       SizedBox(
-          //         height: 170,
-          //         width: MediaQuery.of(context).size.width - 32,
-          //         child: ClipRRect(
-          //           borderRadius: const BorderRadius.all(Radius.circular(18)),
-          //           child: PageView.builder(
-          //               itemCount: 3,
-          //               controller: _pageController,
-          //               onPageChanged: (int page) {
-          //                 setState(() {
-          //                   _currentPage = page;
-          //                 });
-          //               },
-          //               itemBuilder: (context, index) {
-          //                 return pageViewTile();
-          //               }),
-          //         ),
-          //       ),
-          //       Container(
-          //         margin: const EdgeInsets.only(top: 11),
-          //         child: Row(
-          //           mainAxisAlignment: MainAxisAlignment.center,
-          //           children: dots,
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          // ),
-
           Container(
             child: Column(
               children: [
@@ -471,7 +402,6 @@ class _HomePageState extends ConsumerState<HomePage> {
       child: Column(
         children: [
           CircleAvatar(
-            // radius: 31.5,
             radius: 30,
             backgroundColor: const Color(0xFF6F30C0),
             child: CircleAvatar(
