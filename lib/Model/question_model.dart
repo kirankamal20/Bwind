@@ -9,7 +9,7 @@ class FlutterQuizQuestion {
 }
 
 class FlutterQuiz {
-  static List<FlutterQuizQuestion> questions = [
+  static List<FlutterQuizQuestion> flutterQuestions = [
     FlutterQuizQuestion(
       question:
           "What programming language is primarily used for Flutter app development?",
@@ -109,6 +109,30 @@ class FlutterQuiz {
         {"A container for all the app's screens and widgets": false},
         {"A widget for displaying material design components": false},
         {"All of the above": true},
+      ],
+    ),
+  ];
+  static List<FlutterQuizQuestion> cProgrammingQuestions = [
+    FlutterQuizQuestion(
+      question:
+          "What programming language is primarily used for Flutter app development?",
+      options: [
+        {"JavaScript": false},
+        {"Dart": true},
+        {"Python": false},
+        {"Swift": false},
+      ],
+    ),
+  ];
+  static List<FlutterQuizQuestion> webDevelopMentQuestion = [
+    FlutterQuizQuestion(
+      question:
+          "What programming language is primarily used for Flutter app development?",
+      options: [
+        {"JavaScript": false},
+        {"Dart": true},
+        {"Python": false},
+        {"Swift": false},
       ],
     ),
   ];

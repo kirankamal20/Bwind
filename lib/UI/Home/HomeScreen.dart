@@ -1,3 +1,4 @@
+import 'package:bwind/UI/chat/chat_page.dart';
 import 'package:bwind/shared/extension/anotted_region_ext.dart';
 import 'package:flutter/material.dart';
 
@@ -14,24 +15,26 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
-  TabController? _tabController;
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  late TabController tabController;
   int _activeIndex = 0;
 
   @override
   void initState() {
-    _activeIndex = 0;
-    _tabController = TabController(length: 5, vsync: this);
     super.initState();
+    tabController = TabController(
+      initialIndex: 0,
+      length: 5,
+      vsync: this,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    _tabController!.addListener(() {
-      if (_tabController!.indexIsChanging) {
+    tabController.addListener(() {
+      if (tabController.indexIsChanging) {
         setState(() {
-          _activeIndex = _tabController!.index;
+          _activeIndex = tabController.index;
         });
       }
     });
@@ -46,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen>
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10), color: Colors.black),
             child: TabBar(
-              controller: _tabController,
+              controller: tabController,
               tabs: [
                 Tab(
                     icon: ImageIcon(AssetImage(_activeIndex != 0
@@ -77,11 +80,11 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ),
         body: TabBarView(
-          controller: _tabController,
+          controller: tabController,
           children: [
             const HomePage(),
             const MyCoursePage().anottedRegion(),
-            const BookMarkPage().anottedRegion(),
+            const ChatPage().anottedRegion(),
             const InboxPage().anottedRegion(),
             const ProfilePage().anottedRegion()
           ],

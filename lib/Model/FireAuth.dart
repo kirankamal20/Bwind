@@ -2,69 +2,105 @@ import 'package:bwind/Model/AuthResponse.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Userbase.dart';
 
 class FireAuth {
   static FirebaseAuth auth = FirebaseAuth.instance;
 
-  static Future<AuthResponse> registerUserUsingEmailPassword(
-      {required String name,
-      required String email,
-      required String password}) async {
+  static void registerUserUsingEmailPassword({
+    required String name,
+    required String email,
+    required String password,
+    required Function() isLoading,
+    required Function(String) onError,
+    required Function(User) success,
+  }) async {
     final auth = FireAuth.auth;
-    User? user;
-    UserCredential? userCredential;
+
     try {
-      userCredential = await auth.createUserWithEmailAndPassword(
+      isLoading();
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      var userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      user = userCredential.user;
-      await user!.updateDisplayName(name);
-      await user.reload();
-      user = auth.currentUser;
 
-      Userbase.insertUser(
-          Userbase(
-                  name: user!.displayName,
-                  email: user.email,
-                  password: password,
-                  createTime: DateTime.now())
-              .toMap(),
-          user.uid);
+      if (userCredential.user != null) {
+        userCredential.user!.updateDisplayName(name);
+        await userCredential.user!.reload();
 
-      user = userCredential.user;
-      return AuthResponse(
-          user: user, msg: "Registered Successfully", code: true);
+        Userbase.insertUser(
+            Userbase(
+                    name: userCredential.user!.displayName,
+                    email: userCredential.user!.email,
+                    password: password,
+                    createTime: DateTime.now())
+                .toMap(),
+            userCredential.user!.uid);
+        await preferences.setBool("isLogedin", true);
+        success(userCredential.user!);
+      } else {
+        onError("Registration failed");
+      }
+      // user = userCredential.user;
+      // await user!.updateDisplayName(name);
+      // await user.reload();
+      // user = auth.currentUser;
+
+      // Userbase.insertUser(
+      //     Userbase(
+      //             name: user!.displayName,
+      //             email: user.email,
+      //             password: password,
+      //             createTime: DateTime.now())
+      //         .toMap(),
+      //     user.uid);
+
+      // user = userCredential.user;
+      // return AuthResponse(
+      //     user: user, msg: "Registered Successfully", code: true);
     } on FirebaseAuthException catch (e) {
       if (e.code == "weak-password") {
-        return AuthResponse(user: null, msg: "Password is weak !", code: false);
+        onError("Password is weak !");
       } else if (e.code == 'email-already-in-use') {
-        return AuthResponse(
-            user: null, msg: "Email is already registered", code: false);
+        onError("Email is already registered");
+      } else {
+        onError("Firebase Auth Error: ${e.code}");
       }
     } catch (e) {
-      print(e);
-      return AuthResponse(user: null, msg: "Something Is Wrong", code: false);
+      onError("Error during: ${e.toString()}");
     }
-    return AuthResponse(user: null, msg: "Something Is Wrong", code: false);
   }
 
-  static Future<AuthResponse> signInUsingEmailPassword(
-      {required String email, required String password}) async {
-    User? user;
+  static void signInUsingEmailPassword(
+      {required String email,
+      required String password,
+      required Function() isLoading,
+      required Function(String) onError,
+      required Function(User) success}) async {
     final auth = FireAuth.auth;
     try {
+      isLoading();
+      SharedPreferences preferences = await SharedPreferences.getInstance();
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
-      user = userCredential.user;
+      if (userCredential.user != null) {
+        await preferences.setBool("isLogedin", true);
+        success(userCredential.user!);
+      } else {
+        onError("Sign-in failed: UserCredential is null");
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        return AuthResponse(user: null, msg: "User Not found", code: false);
+        onError("User not found. Please enter correct userid.");
       } else if (e.code == 'wrong-password') {
-        return AuthResponse(user: null, msg: "Wrong password", code: false);
+        onError("Password is incorrect.");
+      } else {
+        onError("Firebase Auth Error: ${e.code}");
       }
+    } catch (e) {
+      onError("Error during sign-in: ${e.toString()}");
     }
-    return AuthResponse(user: user, msg: "Loged In", code: true);
   }
 
   static signOut() async {

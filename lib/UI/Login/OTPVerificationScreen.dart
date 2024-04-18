@@ -182,7 +182,10 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                                     Userbase userBase =
                                         await Userbase.getUserBaseByEmail(
                                             email);
-                                    await FireAuth.signInUsingEmailPassword(
+                                    FireAuth.signInUsingEmailPassword(
+                                        isLoading: () {},
+                                        onError: (p0) {},
+                                        success: (p0) {},
                                         email: userBase.email!,
                                         password: userBase.password!);
                                     setState(() {

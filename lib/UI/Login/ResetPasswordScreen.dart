@@ -1,6 +1,6 @@
 import 'package:bwind/Model/AuthResponse.dart';
 import 'package:bwind/Model/FireAuth.dart';
-import 'package:bwind/UI/Login/LoginScreen.dart';
+import 'package:bwind/UI/Login/login_screen.dart';
 import 'package:bwind/validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

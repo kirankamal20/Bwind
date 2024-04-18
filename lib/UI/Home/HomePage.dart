@@ -1,16 +1,10 @@
-import 'package:bwind/Model/FireAuth.dart';
+
 import 'package:bwind/UI/Home/HomeSearchScreen.dart';
-import 'package:bwind/UI/chat/chat_page.dart';
 import 'package:bwind/UI/chat/provider/chat_bot_provider.dart';
-import 'package:bwind/UI/chat/provider/message_provider.dart';
-import 'package:bwind/UI/quizz/quizz_screen.dart';
-import 'package:bwind/core/config/type_of_bot.dart';
-import 'package:bwind/data/hive/model/chat_bot/chat_bot.dart';
+import 'package:bwind/UI/quizz/quizz_menu_page.dart';
 import 'package:bwind/shared/extension/anotted_region_ext.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import '../../translates/locale_keys.g.dart';
@@ -24,8 +18,7 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  final PageController _pageController = PageController();
-
+  FirebaseAuth auth = FirebaseAuth.instance;
   List<Map<String, String>> topMentorsList = [
     {"image": "assets/images/profile4.png", "name": "Dhyan"},
     {"image": "assets/images/profile1.png", "name": "kush"},
@@ -42,39 +35,18 @@ class _HomePageState extends ConsumerState<HomePage> {
     {"category_name": "B-Tech", "image": "assets/images/category1.png"},
   ];
 
-  User? _currentUser;
-  int? _currentPage;
   final uuid = const Uuid();
 
-  final bool _isBuildingChatBot = false;
   String currentState = '';
 
   @override
   void initState() {
-    _currentUser = FireAuth.auth.currentUser;
-    _currentPage = 0;
     ref.read(chatBotListProvider.notifier).fetchChatBots();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> dots = List.generate(
-      3,
-      (index) {
-        return AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            margin: const EdgeInsets.symmetric(horizontal: 3),
-            height: 5,
-            width: index == _currentPage! ? 25 : 5,
-            decoration: BoxDecoration(
-                color: index == _currentPage!
-                    ? const Color(0xFF6F30C0)
-                    : const Color(0xFFCFBAE3),
-                borderRadius: const BorderRadius.all(Radius.circular(50))));
-      },
-    );
-
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -102,13 +74,24 @@ class _HomePageState extends ConsumerState<HomePage> {
                       children: [
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.7,
-                          child: Text(
-                            "${LocaleKeys.home_hey.tr()} ${_currentUser!.displayName}",
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.w700),
+                          child: StreamBuilder(
+                            stream: FirebaseAuth.instance.userChanges(),
+                            builder: (ctx, futureSnapshot) {
+                              if (futureSnapshot.connectionState ==
+                                  ConnectionState.none) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                              return Text(
+                                "${LocaleKeys.home_hey.tr()} ${futureSnapshot.data?.displayName ?? "Name not Availabe"} ",
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w700),
+                              );
+                            },
                           ),
                         ),
                         const Text(
@@ -185,132 +168,128 @@ class _HomePageState extends ConsumerState<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // ElevatedButton(
+                //     onPressed: () async {
+                //       Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //             builder: (context) => const ChatPage(),
+                //           ));
+                //     },
+                //     child: const Text("Pdf Summarize")),
                 ElevatedButton(
-                    onPressed: () async {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ChatPage(),
-                          ));
-                    },
-                    child: const Text("Pdf Summarize")),
-                ElevatedButton(
-                    onPressed: () async {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const QuizzPage(),
-                          ));
-                    },
-                    child: const Text("Quizz")),
+                  onPressed: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const QuizzmenuPage(),
+                        ));
+                  },
+                  child: const Text("Quizz"),
+                ),
               ],
             ),
           ),
-          Container(
-            child: Column(
-              children: [
-                Container(
-                    margin: const EdgeInsets.symmetric(vertical: 15),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              listTitle(LocaleKeys.home_top_mentors.tr()),
-                              InkWell(
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      LocaleKeys.home_view_all.tr(),
-                                      style: const TextStyle(
-                                          color: Color(0xFF6F30C0),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    const Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 3),
-                                      child: ImageIcon(
-                                        AssetImage(
-                                          "assets/images/right_arrow_icon.png",
-                                        ),
+          Column(
+            children: [
+              Container(
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            listTitle(LocaleKeys.home_top_mentors.tr()),
+                            InkWell(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    LocaleKeys.home_view_all.tr(),
+                                    style: const TextStyle(
                                         color: Color(0xFF6F30C0),
-                                        size: 19,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 3),
+                                    child: ImageIcon(
+                                      AssetImage(
+                                        "assets/images/right_arrow_icon.png",
                                       ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                                      color: Color(0xFF6F30C0),
+                                      size: 19,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 15),
-                          width: MediaQuery.of(context).size.width,
-                          height: 90,
-                          child: topMentorListView(),
-                        )
-                      ],
-                    ))
-              ],
-            ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 15),
+                        width: MediaQuery.of(context).size.width,
+                        height: 90,
+                        child: topMentorListView(),
+                      )
+                    ],
+                  ))
+            ],
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.12,
           ),
-          Container(
-            child: Column(
-              children: [
-                Container(
-                    margin: const EdgeInsets.symmetric(vertical: 15),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              listTitle(
-                                  LocaleKeys.home_most_popular_caurse.tr()),
-                              InkWell(
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      LocaleKeys.home_view_all.tr(),
-                                      style: const TextStyle(
-                                          color: Color(0xFF6F30C0),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    const Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 3),
-                                      child: ImageIcon(
-                                        AssetImage(
-                                          "assets/images/right_arrow_icon.png",
-                                        ),
+          Column(
+            children: [
+              Container(
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            listTitle(LocaleKeys.home_most_popular_caurse.tr()),
+                            InkWell(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    LocaleKeys.home_view_all.tr(),
+                                    style: const TextStyle(
                                         color: Color(0xFF6F30C0),
-                                        size: 19,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 3),
+                                    child: ImageIcon(
+                                      AssetImage(
+                                        "assets/images/right_arrow_icon.png",
                                       ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                                      color: Color(0xFF6F30C0),
+                                      size: 19,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 15),
-                          width: MediaQuery.of(context).size.width,
-                          height: 80,
-                          child: mostPospularCourseListView(),
-                        )
-                      ],
-                    ))
-              ],
-            ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 15),
+                        width: MediaQuery.of(context).size.width,
+                        height: 80,
+                        child: mostPospularCourseListView(),
+                      )
+                    ],
+                  ))
+            ],
           )
         ],
       ),
@@ -459,7 +438,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         itemCount: mostPopulerCourseList.length,
         itemBuilder: (context, index) {
           return mostPopulerCourseTile(mostPopulerCourseList[index]["image"]!,
-              mostPopulerCourseList[index]["category_name"]!);
+              mostPopulerCourseList[index]["category_name"] ?? "");
         });
   }
 }

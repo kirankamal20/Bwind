@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:light_modal_bottom_sheet/light_modal_bottom_sheet.dart';
 
 mixin GlobalHelper<T extends StatefulWidget> on State<T> {
+  bool isDialogShowing = false;
   void showBottomDialog({required Widget child}) {
     showBarModalBottomSheet(
       context: context,
@@ -17,6 +18,7 @@ mixin GlobalHelper<T extends StatefulWidget> on State<T> {
     required String tittle,
     required String subtittle,
   }) {
+    isDialogShowing = true;
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -26,6 +28,7 @@ mixin GlobalHelper<T extends StatefulWidget> on State<T> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
+                isDialogShowing = false;
                 Navigator.of(context).pop(); // Close the dialog
               },
               child: const Text("OK"),
@@ -35,8 +38,10 @@ mixin GlobalHelper<T extends StatefulWidget> on State<T> {
       },
     );
   }
-}
 
+  bool isDialogisOpen() => isDialogShowing;
+}
+ 
 
 
 

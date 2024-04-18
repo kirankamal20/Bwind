@@ -123,207 +123,284 @@ class _ChatPageState extends ConsumerState<ChatPage> with GlobalHelper {
     }).toList()
       ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
 
-    return PopScope(
-      canPop: true,
-      child: Scaffold(
-        appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.white),
-          title: const Text(
-            "Pdf Summarize",
-            style: TextStyle(color: Colors.white),
-          ),
-          centerTitle: true,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  showBottomDialog(
-                      child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 30, horizontal: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const Text(
-                          "Start Fresh ? ",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          "Are you sure want to start a new chat ?",
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        PrettyWaveButton(
-                          onPressed: () {
-                            ref.invalidate(messageListProvider);
-                            ref.invalidate(chatBotListProvider);
-                            ref.invalidate(isPdfReadProvider);
-                            ref.invalidate(isBuildChatbotProvider);
-                            Navigator.of(context).pop();
-                          },
-                          backgroundColor: const Color(0xFF6F30C0),
-                          child: const Text(
-                            'Start new chat',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        PrettyWaveButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                          },
-                          backgroundColor: const Color(0xFF6F30C0),
-                          child: const Text(
-                            'Go Back',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ));
-                },
-                icon: const Icon(Icons.add))
-          ],
-        ),
-        body: SafeArea(
-          child: Stack(
-            children: [
-              // const Positioned(
-              //   left: -300,
-              //   top: -00,
-              //   child: SizedBox(
-              //     height: 500,
-              //     width: 600,
-              //     // decoration: BoxDecoration(
-              //     //   gradient: RadialGradient(
-              //     //     colors: [
-              //     //       color.withOpacity(0.5),
-              //     //       // context.colorScheme.background.withOpacity(0.5),
-              //     //     ],
-              //     //   ),
-              //     // ),
-              //   ),
-              // ),
-              // CustomPaint(
-              //   painter: BackgroundCurvesPainter(),
-              //   size: Size.infinite,
-              // ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    Row(
+    return Scaffold(
+      // appBar: AppBar(
+      //   iconTheme: const IconThemeData(color: Colors.white),
+      //   title: const Text(
+      //     "Pdf Summarize",
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      //   centerTitle: true,
+      //   actions: [
+      //     IconButton(
+      //         onPressed: () {
+      //           showBottomDialog(
+      //               child: Padding(
+      //             padding: const EdgeInsets.symmetric(
+      //                 vertical: 30, horizontal: 30),
+      //             child: Column(
+      //               crossAxisAlignment: CrossAxisAlignment.stretch,
+      //               children: [
+      //                 const Text(
+      //                   "Start Fresh ? ",
+      //                   style: TextStyle(
+      //                       fontWeight: FontWeight.bold, fontSize: 20),
+      //                 ),
+      //                 const SizedBox(
+      //                   height: 10,
+      //                 ),
+      //                 const Text(
+      //                   "Are you sure want to start a new chat ?",
+      //                   style: TextStyle(color: Colors.grey),
+      //                 ),
+      //                 const SizedBox(
+      //                   height: 50,
+      //                 ),
+      //                 Center(
+      //                   child: PrettyWaveButton(
+      //                     onPressed: () {
+      //                       ref.invalidate(messageListProvider);
+      //                       ref.invalidate(chatBotListProvider);
+      //                       ref.invalidate(isPdfReadProvider);
+      //                       ref.invalidate(isBuildChatbotProvider);
+      //                       Navigator.of(context).pop();
+      //                     },
+      //                     backgroundColor: const Color(0xFF6F30C0),
+      //                     child: const Text(
+      //                       'Start new chat',
+      //                       style: TextStyle(
+      //                         color: Colors.white,
+      //                       ),
+      //                     ),
+      //                   ),
+      //                 ),
+
+      //                 // PrettyWaveButton(
+      //                 //   onPressed: () {
+      //                 //     Navigator.of(context).pop();
+      //                 //     Navigator.of(context).pop();
+      //                 //   },
+      //                 //   backgroundColor: const Color(0xFF6F30C0),
+      //                 //   child: const Text(
+      //                 //     'Go Back',
+      //                 //     style: TextStyle(
+      //                 //       color: Colors.white,
+      //                 //     ),
+      //                 //   ),
+      //                 // ),
+      //               ],
+      //             ),
+      //           ));
+      //         },
+      //         icon: const Icon(Icons.add))
+      //   ],
+      // ),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            // const Positioned(
+            //   left: -300,
+            //   top: -00,
+            //   child: SizedBox(
+            //     height: 500,
+            //     width: 600,
+            //     // decoration: BoxDecoration(
+            //     //   gradient: RadialGradient(
+            //     //     colors: [
+            //     //       color.withOpacity(0.5),
+            //     //       // context.colorScheme.background.withOpacity(0.5),
+            //     //     ],
+            //     //   ),
+            //     // ),
+            //   ),
+            // ),
+            // CustomPaint(
+            //   painter: BackgroundCurvesPainter(),
+            //   size: Size.infinite,
+            // ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // IconButton(
-                        //   icon: Icon(
-                        //     Icons.arrow_back,
-                        //     color: context.colorScheme.onSurface,
-                        //   ),
-                        //   onPressed: () {
-                        //     ref
-                        //         .read(chatBotListProvider.notifier)
-                        //         .updateChatBotOnHomeScreen(chatBot);
-                        //     context.pop();
-                        //   },
-                        // ),
-                        // Container(
-                        //   alignment: Alignment.center,
-                        //   margin: const EdgeInsets.symmetric(vertical: 16),
-                        //   width: 120,
-                        //   height: 40,
-                        //   decoration: BoxDecoration(
-                        //     color: context.colorScheme.primary,
-                        //     borderRadius: BorderRadius.circular(30),
-                        //     boxShadow: [
-                        //       BoxShadow(
-                        //         color: Colors.black.withOpacity(0.25),
-                        //         offset: const Offset(4, 4),
-                        //         blurRadius: 8,
-                        //       ),
-                        //     ],
-                        //   ),
-                        //   child: Center(
-                        //     child: Text(
-                        //       '$title Buddy',
-                        //       style: TextStyle(
-                        //         color: context.colorScheme.surface,
-                        //         fontSize: 14,
-                        //         fontWeight: FontWeight.bold,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        if (chatBot.typeOfBot == TypeOfBot.image)
-                          CircleAvatar(
-                            maxRadius: 21,
-                            backgroundImage: FileImage(
-                              File(chatBot.attachmentPath!),
-                            ),
-                            child: TextButton(
-                              onPressed: () {
-                                showDialog<AlertDialog>(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      content: SingleChildScrollView(
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                          child: Image.file(
-                                            File(chatBot.attachmentPath!),
+                        const Text(
+                          "Pdf Summarize",
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              showBottomDialog(
+                                  child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 30, horizontal: 30),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    const Text(
+                                      "Start Fresh ? ",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Text(
+                                      "Are you sure want to start a new chat ?",
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                    const SizedBox(
+                                      height: 50,
+                                    ),
+                                    Center(
+                                      child: PrettyWaveButton(
+                                        onPressed: () {
+                                          ref.invalidate(messageListProvider);
+                                          ref.invalidate(chatBotListProvider);
+                                          ref.invalidate(isPdfReadProvider);
+                                          ref.invalidate(
+                                              isBuildChatbotProvider);
+                                          Navigator.of(context).pop();
+                                        },
+                                        backgroundColor:
+                                            const Color(0xFF6F30C0),
+                                        child: const Text(
+                                          'Start new chat',
+                                          style: TextStyle(
+                                            color: Colors.white,
                                           ),
                                         ),
                                       ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: const Text('Close'),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                              child: const SizedBox.shrink(),
-                            ),
-                          )
-                        else
-                          const SizedBox(width: 42),
+                                    ),
+
+                                    // PrettyWaveButton(
+                                    //   onPressed: () {
+                                    //     Navigator.of(context).pop();
+                                    //     Navigator.of(context).pop();
+                                    //   },
+                                    //   backgroundColor: const Color(0xFF6F30C0),
+                                    //   child: const Text(
+                                    //     'Go Back',
+                                    //     style: TextStyle(
+                                    //       color: Colors.white,
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
+                              ));
+                            },
+                            icon: const Icon(Icons.add))
                       ],
                     ),
-                    const SizedBox(
-                      height: 8,
+                  ),
+                  const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // IconButton(
+                      //   icon: Icon(
+                      //     Icons.arrow_back,
+                      //     color: context.colorScheme.onSurface,
+                      //   ),
+                      //   onPressed: () {
+                      //     ref
+                      //         .read(chatBotListProvider.notifier)
+                      //         .updateChatBotOnHomeScreen(chatBot);
+                      //     context.pop();
+                      //   },
+                      // ),
+                      // Container(
+                      //   alignment: Alignment.center,
+                      //   margin: const EdgeInsets.symmetric(vertical: 16),
+                      //   width: 120,
+                      //   height: 40,
+                      //   decoration: BoxDecoration(
+                      //     color: context.colorScheme.primary,
+                      //     borderRadius: BorderRadius.circular(30),
+                      //     boxShadow: [
+                      //       BoxShadow(
+                      //         color: Colors.black.withOpacity(0.25),
+                      //         offset: const Offset(4, 4),
+                      //         blurRadius: 8,
+                      //       ),
+                      //     ],
+                      //   ),
+                      //   child: Center(
+                      //     child: Text(
+                      //       '$title Buddy',
+                      //       style: TextStyle(
+                      //         color: context.colorScheme.surface,
+                      //         fontSize: 14,
+                      //         fontWeight: FontWeight.bold,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      if (chatBot.typeOfBot == TypeOfBot.image)
+                        CircleAvatar(
+                          maxRadius: 21,
+                          backgroundImage: FileImage(
+                            File(chatBot.attachmentPath!),
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              showDialog<AlertDialog>(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: SingleChildScrollView(
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(16),
+                                        child: Image.file(
+                                          File(chatBot.attachmentPath!),
+                                        ),
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text('Close'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            child: const SizedBox.shrink(),
+                          ),
+                        )
+                      else
+                        const SizedBox(width: 42),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Expanded(
+                    child: ChatInterfaceWidget(
+                      messages: messages,
+                      chatBot: chatBot,
+                      color: color,
+                      imagePath: imagePath,
+                      uploadPdf: uploadPdf,
+                      currentState: currentState,
                     ),
-                    Expanded(
-                      child: ChatInterfaceWidget(
-                        messages: messages,
-                        chatBot: chatBot,
-                        color: color,
-                        imagePath: imagePath,
-                        uploadPdf: uploadPdf,
-                        currentState: currentState,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

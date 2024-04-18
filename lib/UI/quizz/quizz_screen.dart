@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bwind/Model/question_model.dart';
+import 'package:bwind/Model/quizz_reponse_model.dart';
 import 'package:bwind/core/extension/context.dart';
 import 'package:bwind/shared/helpers/global_helper.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +14,9 @@ enum StudentPassStatus {
 }
 
 class QuizzPage extends StatefulWidget {
-  const QuizzPage({Key? key}) : super(key: key);
+  final List<Question> topicWiseQuestions;
+  const QuizzPage({Key? key, required this.topicWiseQuestions})
+      : super(key: key);
 
   @override
   State<QuizzPage> createState() => _QuizzPageState();
@@ -23,7 +27,7 @@ class _QuizzPageState extends State<QuizzPage> with GlobalHelper {
   int score = 0;
   double scorePercentage = 0.0;
   int optionsIndex = -1;
-  final List<FlutterQuizQuestion> questions = FlutterQuiz.questions;
+
   int counter = 30;
   List<String> leadingOptions = ["A", "B", "C", "D"];
   Timer? timer;
@@ -33,8 +37,13 @@ class _QuizzPageState extends State<QuizzPage> with GlobalHelper {
     super.initState();
   }
 
-  void nextQuestions(Map<String, bool>? option) {
-    if (optionsIndex == -1 && option != null) {
+  void nextQuestions(Question? question, String selectedAnswer) {
+    log("length of questions ${widget.topicWiseQuestions.length}");
+    log("Answer ${question?.answer.toString()}");
+    log("Selected Answer $selectedAnswer");
+    log("Question number: $questionNumber");
+
+    if (optionsIndex == -1 && question != null && selectedAnswer.isNotEmpty) {
       showSelectOptionDialog(
         tittle: "Alert",
         subtittle: "Please select one option",
@@ -42,20 +51,37 @@ class _QuizzPageState extends State<QuizzPage> with GlobalHelper {
       return;
     }
 
-    setState(() {
-      if (isCheckQuestionEnded()) {
-        counter = 30;
-        questionNumber++;
-        optionsIndex = -1;
-        if (option != null && option.containsValue(true)) {
-          score++;
-        }
+    if (isCheckQuestionEnded()) {
+      print("Question Ended");
+
+      // Check if the selected answer is correct for the last question
+      if (question != null &&
+          question.answer.contains(selectedAnswer) &&
+          selectedAnswer.isNotEmpty) {
+        score++;
       }
-    });
+    } else {
+      counter = 30;
+      optionsIndex = -1;
+      questionNumber++;
+
+      // Check if the selected answer is correct
+      if (question != null &&
+          question.answer.contains(selectedAnswer) &&
+          selectedAnswer.isNotEmpty) {
+        score++;
+      }
+
+      setState(() {});
+    }
+  }
+
+  bool isCheckQuestionEnded() {
+    return questionNumber >= widget.topicWiseQuestions.length - 1;
   }
 
   StudentPassStatus passPercentageStatus() {
-    final double percentage = score * 100 / questions.length;
+    final double percentage = score * 100 / widget.topicWiseQuestions.length;
     return percentage > 70
         ? StudentPassStatus.passed
         : StudentPassStatus.failed;
@@ -63,29 +89,27 @@ class _QuizzPageState extends State<QuizzPage> with GlobalHelper {
 
   void submitAnswer() {
     final status = passPercentageStatus();
-    showSelectOptionDialog(
-      tittle: status == StudentPassStatus.passed
-          ? "Your Test is Passed"
-          : "Your Test is Failed",
-      subtittle: "Your Score is $score / ${questions.length}",
-    );
-  }
-
-  bool isCheckQuestionEnded() {
-    return questionNumber < questions.length - 1;
+    if (!isDialogisOpen()) {
+      showSelectOptionDialog(
+        tittle: status == StudentPassStatus.passed
+            ? "Your Test is Passed"
+            : "Your Test is Failed",
+        subtittle: "Your Score is $score / ${widget.topicWiseQuestions.length}",
+      );
+    }
   }
 
   bool isLastQuestion() {
-    return questionNumber == questions.length - 1;
+    return questionNumber == widget.topicWiseQuestions.length - 1;
   }
 
-  void onTapOption(int index, Map<String, bool> option) {
+  void onTapOption(int index, Question question, String selectedAnswer) {
     setState(() {
       optionsIndex = index;
     });
     Future.delayed(
       const Duration(milliseconds: 100),
-      () => nextQuestions(option),
+      () => nextQuestions(question, selectedAnswer),
     );
   }
 
@@ -97,7 +121,7 @@ class _QuizzPageState extends State<QuizzPage> with GlobalHelper {
       if (counter == 0) {
         timer1.cancel();
         if (!isLastQuestion()) {
-          nextQuestions(null);
+          nextQuestions(null, '');
           counter = 30;
           startCountdown();
         } else {
@@ -121,7 +145,7 @@ class _QuizzPageState extends State<QuizzPage> with GlobalHelper {
         title: const Text("Quiz"),
         actions: [
           Text(
-            "${questionNumber + 1} / ${questions.length}",
+            "${questionNumber + 1} / ${widget.topicWiseQuestions.length}",
             style: const TextStyle(fontSize: 17, color: Colors.white),
           ),
           const SizedBox(
@@ -173,19 +197,26 @@ class _QuizzPageState extends State<QuizzPage> with GlobalHelper {
               ),
               padding: const EdgeInsets.all(10),
               child: Text(
-                questions[questionNumber].question,
+                widget.topicWiseQuestions[questionNumber].question,
                 style: const TextStyle(color: Colors.white),
               ),
             ),
             const SizedBox(height: 20),
             Flexible(
               child: ListView.builder(
-                itemCount: questions[questionNumber].options.length,
+                itemCount:
+                    widget.topicWiseQuestions[questionNumber].options.length,
                 itemBuilder: (context, index) {
-                  final option = questions[questionNumber].options[index];
+                  final qustionAnswerOptions =
+                      widget.topicWiseQuestions[questionNumber].options[index];
 
+                  final question = widget.topicWiseQuestions[questionNumber];
+                  final selectedAnswer =
+                      widget.topicWiseQuestions[questionNumber].options[index];
                   return GestureDetector(
-                    onTap: () => onTapOption(index, option),
+                    onTap: () {
+                      onTapOption(index, question, selectedAnswer);
+                    },
                     child: Card(
                       color: optionsIndex == index
                           ? context.colorScheme.inverseSurface
@@ -202,7 +233,7 @@ class _QuizzPageState extends State<QuizzPage> with GlobalHelper {
                           ),
                         ),
                         title: Text(
-                          option.keys.first,
+                          qustionAnswerOptions,
                           style: TextStyle(
                             color: optionsIndex == index
                                 ? Colors.white
@@ -221,7 +252,7 @@ class _QuizzPageState extends State<QuizzPage> with GlobalHelper {
 
                 isLastQuestion() ? submitAnswer() : null;
               },
-              child: Text(isCheckQuestionEnded() ? "Next" : "Submit"),
+              child: Text(isCheckQuestionEnded() ? "Submit" : "Next"),
             ),
           ],
         ),

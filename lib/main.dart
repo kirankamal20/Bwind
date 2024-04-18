@@ -31,10 +31,12 @@ Future<void> main() async {
     await SentryFlutter.init((options) {
       options.dsn =
           'https://b2c7ee75f00e241fe524db04b8c602a5@o4506263171629056.ingest.us.sentry.io/4507094842408960';
+
       // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
       // We recommend adjusting this value in production.
       options.tracesSampleRate = 1.0;
     });
+
     runApp(EasyLocalization(
         supportedLocales: Translates.all,
         path: "assets/translates",

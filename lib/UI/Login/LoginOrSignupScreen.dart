@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'LoginScreen.dart';
+import 'login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginOrSignupScreen extends StatefulWidget {
