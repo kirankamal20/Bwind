@@ -1,14 +1,17 @@
-
+import 'package:bwind/Model/notes_model.dart';
 import 'package:bwind/UI/Home/HomeSearchScreen.dart';
 import 'package:bwind/UI/chat/provider/chat_bot_provider.dart';
+import 'package:bwind/UI/course_notes/course_note_page.dart';
 import 'package:bwind/UI/quizz/quizz_menu_page.dart';
+import 'package:bwind/data/const/note_json_response.dart';
 import 'package:bwind/shared/extension/anotted_region_ext.dart';
-import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
+
 import '../../translates/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -38,7 +41,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   final uuid = const Uuid();
 
   String currentState = '';
-
+  var courseNoteResult = NoteModel.fromMap(noteResponse);
   @override
   void initState() {
     ref.read(chatBotListProvider.notifier).fetchChatBots();
@@ -437,8 +440,27 @@ class _HomePageState extends ConsumerState<HomePage> {
         scrollDirection: Axis.horizontal,
         itemCount: mostPopulerCourseList.length,
         itemBuilder: (context, index) {
-          return mostPopulerCourseTile(mostPopulerCourseList[index]["image"]!,
-              mostPopulerCourseList[index]["category_name"] ?? "");
+          return InkWell(
+            child: mostPopulerCourseTile(mostPopulerCourseList[index]["image"]!,
+                mostPopulerCourseList[index]["category_name"] ?? ""),
+            onTap: () {
+              var courseWiseNotes = courseNoteResult.notes
+                  .firstWhere((element) =>
+                      element.course_name ==
+                      mostPopulerCourseList[index]["category_name"])
+                  .course_notes;
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CourseNotePage(
+                    courseName:
+                        mostPopulerCourseList[index]["category_name"] ?? "",
+                    courseWiseNotes: courseWiseNotes,
+                  ),
+                ),
+              );
+            },
+          );
         });
   }
 }
