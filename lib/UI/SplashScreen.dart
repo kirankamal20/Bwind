@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bwind/UI/AppInfo/AppInfoScreen.dart';
 import 'package:bwind/UI/Home/HomeScreen.dart';
 import 'package:bwind/UI/Login/LoginOrSignupScreen.dart';
+import 'package:bwind/UI/admin/admin_page.dart';
 import 'package:bwind/shared/extension/anotted_region_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -30,10 +30,15 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const HomeScreen()));
       } else if (preferences.getBool("isFirstTime") != null) {
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const LoginOrSignupScreen()));
+        if (preferences.getBool("isAdmin") != null) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const AdminPage()));
+        } else {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const LoginOrSignupScreen()));
+        }
       } else {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const AppInfoScreen()));

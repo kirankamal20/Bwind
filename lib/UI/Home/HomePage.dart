@@ -1,3 +1,4 @@
+import 'package:bwind/Model/getall_notes_model.dart';
 import 'package:bwind/Model/notes_model.dart';
 import 'package:bwind/UI/Home/HomeSearchScreen.dart';
 import 'package:bwind/UI/chat/provider/chat_bot_provider.dart';
@@ -5,6 +6,7 @@ import 'package:bwind/UI/course_notes/course_note_page.dart';
 import 'package:bwind/UI/quizz/quizz_menu_page.dart';
 import 'package:bwind/data/const/note_json_response.dart';
 import 'package:bwind/shared/extension/anotted_region_ext.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -42,10 +44,18 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   String currentState = '';
   var courseNoteResult = NoteModel.fromMap(noteResponse);
+  final firebaseFirestore = FirebaseFirestore.instance;
+  final collectionRefer = FirebaseFirestore.instance.collection("pdfs");
   @override
   void initState() {
     ref.read(chatBotListProvider.notifier).fetchChatBots();
     super.initState();
+  }
+
+  Future<List<GetAllNotesModel>> getAllNotes() async {
+    final result = await firebaseFirestore.collection("pdfs").get();
+
+    return result.docs.map((e) => GetAllNotesModel.fromMap(e.data())).toList();
   }
 
   @override
@@ -284,12 +294,31 @@ class _HomePageState extends ConsumerState<HomePage> {
                           ],
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 15),
-                        width: MediaQuery.of(context).size.width,
-                        height: 80,
-                        child: mostPospularCourseListView(),
-                      )
+                      FutureBuilder<List<GetAllNotesModel>>(
+                        future: getAllNotes(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return snapshot.data != null
+                                ? Container(
+                                    margin: const EdgeInsets.only(top: 15),
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 80,
+                                    child: mostPospularCourseListView(snapshot
+                                        .data as List<GetAllNotesModel>),
+                                  )
+                                : const Text("Data Not Found");
+                          } else if (snapshot.hasError) {
+                            return Text(" ${snapshot.error}");
+                          } else {
+                            return const Center(
+                              child: SizedBox(
+                                  height: 40,
+                                  width: 40,
+                                  child: CircularProgressIndicator()),
+                            );
+                          }
+                        },
+                      ),
                     ],
                   ))
             ],
@@ -434,7 +463,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 
-  mostPospularCourseListView() {
+  mostPospularCourseListView(List<GetAllNotesModel> getAllNotes) {
     return ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         scrollDirection: Axis.horizontal,
@@ -444,18 +473,22 @@ class _HomePageState extends ConsumerState<HomePage> {
             child: mostPopulerCourseTile(mostPopulerCourseList[index]["image"]!,
                 mostPopulerCourseList[index]["category_name"] ?? ""),
             onTap: () {
-              var courseWiseNotes = courseNoteResult.notes
-                  .firstWhere((element) =>
-                      element.course_name ==
+              var courseWiseNotes = getAllNotes
+                  .where((element) =>
+                      element.noteType ==
                       mostPopulerCourseList[index]["category_name"])
-                  .course_notes;
+                  .toList();
+
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => CourseNotePage(
                     courseName:
                         mostPopulerCourseList[index]["category_name"] ?? "",
-                    courseWiseNotes: courseWiseNotes,
+                    getAllNotes:
+                        mostPopulerCourseList[index]["category_name"] == "All"
+                            ? getAllNotes
+                            : courseWiseNotes,
                   ),
                 ),
               );

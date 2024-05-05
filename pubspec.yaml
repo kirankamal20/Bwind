@@ -1,4 +1,4 @@
-name: bwind
+name: distance_edu
 description: A new Flutter project.
 
 publish_to: 'none'
@@ -17,6 +17,7 @@ dependencies:
   file_picker: ^6.1.1
   firebase_auth: null
   firebase_core: null
+  firebase_storage: ^11.7.4
   flutter:
     sdk: flutter
   flutter_chat_types: ^3.6.2

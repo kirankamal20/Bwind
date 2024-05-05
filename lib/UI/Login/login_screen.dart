@@ -2,8 +2,8 @@ import 'package:bwind/Model/AuthResponse.dart';
 import 'package:bwind/Model/FireAuth.dart';
 import 'package:bwind/UI/Home/HomeScreen.dart';
 import 'package:bwind/UI/Login/ForgotPasswordScreen.dart';
+import 'package:bwind/UI/admin/admin_page.dart';
 import 'package:bwind/validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -70,6 +70,16 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  void navigateToAdminPage() {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AdminPage(),
+      ),
+      (route) => false,
+    );
+  }
+
   void submit() async {
     if (_loginFormKey.currentState!.validate()) {
       if (isLogin) {
@@ -88,38 +98,45 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void login() async {
-    FireAuth.signInUsingEmailPassword(
-      isLoading: () {
-        print("loading...");
-        setState(() {
-          isLoging = true;
-        });
-      },
-      success: (p0) {
-        navigateToHome();
-        Fluttertoast.showToast(
-          msg: "Successfully logged",
-          gravity: ToastGravity.BOTTOM,
-          toastLength: Toast.LENGTH_LONG,
-        );
-        setState(() {
-          isLoging = false;
-        });
-      },
-      onError: (errorMessage) {
-        print("Error: $errorMessage");
-        setState(() {
-          isLoging = false;
-        });
-        Fluttertoast.showToast(
-          msg: errorMessage,
-          gravity: ToastGravity.BOTTOM,
-          toastLength: Toast.LENGTH_LONG,
-        );
-      },
-      email: _emailController.text,
-      password: _passwordController.text,
-    );
+    if (_emailController.text == "Admin@gmail.com" &&
+        _passwordController.text == "Admin@123") {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      await preferences.setBool("isAdmin", true);
+      navigateToAdminPage();
+    } else {
+      FireAuth.signInUsingEmailPassword(
+        isLoading: () {
+          print("loading...");
+          setState(() {
+            isLoging = true;
+          });
+        },
+        success: (p0) {
+          navigateToHome();
+          Fluttertoast.showToast(
+            msg: "Successfully logged",
+            gravity: ToastGravity.BOTTOM,
+            toastLength: Toast.LENGTH_LONG,
+          );
+          setState(() {
+            isLoging = false;
+          });
+        },
+        onError: (errorMessage) {
+          print("Error: $errorMessage");
+          setState(() {
+            isLoging = false;
+          });
+          Fluttertoast.showToast(
+            msg: errorMessage,
+            gravity: ToastGravity.BOTTOM,
+            toastLength: Toast.LENGTH_LONG,
+          );
+        },
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+    }
   }
 
   void sighnUp() async {

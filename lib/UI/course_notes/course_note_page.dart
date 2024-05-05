@@ -1,12 +1,13 @@
-import 'package:bwind/Model/notes_model.dart';
+import 'package:bwind/Model/getall_notes_model.dart';
 import 'package:bwind/UI/pdf_view/pdf_view.dart';
 import 'package:flutter/material.dart';
 
 class CourseNotePage extends StatefulWidget {
   final String courseName;
-  final List<Course_note> courseWiseNotes;
+
+  final List<GetAllNotesModel> getAllNotes;
   const CourseNotePage(
-      {super.key, required this.courseName, required this.courseWiseNotes});
+      {super.key, required this.courseName, required this.getAllNotes});
 
   @override
   State<CourseNotePage> createState() => _CourseNotePageState();
@@ -27,7 +28,7 @@ class _CourseNotePageState extends State<CourseNotePage> {
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(10),
-        itemCount: widget.courseWiseNotes.length,
+        itemCount: widget.getAllNotes.length,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
@@ -35,14 +36,14 @@ class _CourseNotePageState extends State<CourseNotePage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => PdfPageView(
-                    pdfLink: widget.courseWiseNotes[index].pdf_urls,
+                    pdfLink: widget.getAllNotes[index].pdfUrl,
                   ),
                 ),
               );
             },
             child: Card(
                 child: ListTile(
-              title: Text(widget.courseWiseNotes[index].note_name),
+              title: Text(widget.getAllNotes[index].noteName),
             )),
           );
         },
