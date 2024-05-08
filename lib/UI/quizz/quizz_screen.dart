@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bwind/Model/question_model.dart';
-import 'package:bwind/Model/quizz_reponse_model.dart';
-import 'package:bwind/core/extension/context.dart';
-import 'package:bwind/shared/helpers/global_helper.dart';
+ 
+import 'package:distance_edu/Model/quizz_reponse_model.dart';
+import 'package:distance_edu/core/extension/context.dart';
+import 'package:distance_edu/shared/helpers/global_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

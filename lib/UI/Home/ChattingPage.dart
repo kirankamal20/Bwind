@@ -1,4 +1,4 @@
-import 'package:bwind/Model/Message.dart';
+import 'package:distance_edu/Model/Message.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';

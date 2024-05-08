@@ -4,12 +4,13 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:bwind/core/const/api_keys.dart';
-import 'package:bwind/gemini/models/candidates/candidates.dart';
-import 'package:bwind/gemini/models/content/content.dart';
-import 'package:bwind/gemini/repository/base_gemini_repository.dart';
+ 
 
 import 'package:dio/dio.dart';
+import 'package:distance_edu/core/const/api_keys.dart';
+import 'package:distance_edu/gemini/models/candidates/candidates.dart';
+import 'package:distance_edu/gemini/models/content/content.dart';
+import 'package:distance_edu/gemini/repository/base_gemini_repository.dart';
 import 'package:loggy/loggy.dart';
 
 class GeminiRepository extends BaseGeminiRepository {

@@ -1,5 +1,6 @@
  
-import 'package:bwind/gemini/models/content/content.dart';
+ 
+import 'package:distance_edu/gemini/models/content/content.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

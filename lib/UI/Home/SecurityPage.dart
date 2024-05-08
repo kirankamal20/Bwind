@@ -1,4 +1,4 @@
-import 'package:bwind/UI/Home/ChangePasswordScreen.dart';
+import 'package:distance_edu/UI/Home/ChangePasswordScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

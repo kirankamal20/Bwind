@@ -1,4 +1,5 @@
- import 'package:bwind/core/ui/widget/responsive.dart';
+ 
+import 'package:distance_edu/core/ui/widget/responsive.dart';
 import 'package:flutter/material.dart';
 
 extension Context on BuildContext {

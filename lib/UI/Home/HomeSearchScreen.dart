@@ -1,6 +1,6 @@
-import 'package:bwind/Model/Course.dart';
-import 'package:bwind/UI/Home/ChattingPage.dart';
-import 'package:bwind/UI/Home/CourseDetailPage.dart';
+import 'package:distance_edu/Model/Course.dart';
+import 'package:distance_edu/UI/Home/ChattingPage.dart';
+import 'package:distance_edu/UI/Home/CourseDetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';

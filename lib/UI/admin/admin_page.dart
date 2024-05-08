@@ -1,7 +1,8 @@
-import 'package:bwind/UI/Login/LoginOrSignupScreen.dart';
-import 'package:bwind/UI/admin/add_notes_page.dart';
-import 'package:bwind/shared/widgets/custom_admin_card.dart';
-import 'package:bwind/shared/widgets/logout_bottom_sheet.dart';
+ 
+import 'package:distance_edu/UI/Login/LoginOrSignupScreen.dart';
+import 'package:distance_edu/UI/admin/add_notes_page.dart';
+import 'package:distance_edu/shared/widgets/custom_admin_card.dart';
+import 'package:distance_edu/shared/widgets/logout_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

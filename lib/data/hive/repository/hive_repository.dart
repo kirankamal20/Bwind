@@ -1,5 +1,6 @@
-import 'package:bwind/data/hive/model/chat_bot/chat_bot.dart';
-import 'package:bwind/data/hive/repository/base_hive_repository.dart';
+ 
+import 'package:distance_edu/data/hive/model/chat_bot/chat_bot.dart';
+import 'package:distance_edu/data/hive/repository/base_hive_repository.dart';
 import 'package:hive/hive.dart';
 
 class HiveRepository implements BaseHiveRepository {

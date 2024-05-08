@@ -1,7 +1,8 @@
-import 'package:bwind/Model/FireAuth.dart';
-import 'package:bwind/Model/Userbase.dart';
-import 'package:bwind/UI/Login/ResetPasswordScreen.dart';
-import 'package:bwind/validator.dart';
+ 
+import 'package:distance_edu/Model/FireAuth.dart';
+import 'package:distance_edu/Model/Userbase.dart';
+import 'package:distance_edu/UI/Login/ResetPasswordScreen.dart';
+import 'package:distance_edu/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';

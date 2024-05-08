@@ -1,14 +1,13 @@
 import 'dart:io';
-
  
-import 'package:bwind/core/config/type_of_bot.dart';
-import 'package:bwind/core/config/type_of_message.dart';
-import 'package:bwind/data/hive/model/chat_bot/chat_bot.dart';
-import 'package:bwind/data/hive/model/chat_message/chat_message.dart';
-import 'package:bwind/data/hive/repository/hive_repository.dart';
-import 'package:bwind/gemini/models/candidates/candidates.dart';
-import 'package:bwind/gemini/models/parts/parts.dart';
-import 'package:bwind/gemini/repository/gemini_repository.dart';
+import 'package:distance_edu/core/config/type_of_bot.dart';
+import 'package:distance_edu/core/config/type_of_message.dart';
+import 'package:distance_edu/data/hive/model/chat_bot/chat_bot.dart';
+import 'package:distance_edu/data/hive/model/chat_message/chat_message.dart';
+import 'package:distance_edu/data/hive/repository/hive_repository.dart';
+import 'package:distance_edu/gemini/models/candidates/candidates.dart';
+import 'package:distance_edu/gemini/models/parts/parts.dart';
+import 'package:distance_edu/gemini/repository/gemini_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loggy/loggy.dart';

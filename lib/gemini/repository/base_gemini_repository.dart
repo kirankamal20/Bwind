@@ -1,7 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:bwind/gemini/models/candidates/candidates.dart';
-import 'package:bwind/gemini/models/content/content.dart';
+ 
+import 'package:distance_edu/gemini/models/candidates/candidates.dart';
+import 'package:distance_edu/gemini/models/content/content.dart';
  
 
 abstract class BaseGeminiRepository {

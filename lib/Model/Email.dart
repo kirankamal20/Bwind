@@ -1,6 +1,7 @@
 import 'dart:math';
-import 'package:bwind/Model/EmailResponse.dart';
-import 'package:bwind/Model/Userbase.dart';
+ 
+import 'package:distance_edu/Model/EmailResponse.dart';
+import 'package:distance_edu/Model/Userbase.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 

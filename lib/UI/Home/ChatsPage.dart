@@ -1,4 +1,4 @@
-import 'package:bwind/UI/Home/ChattingPage.dart';
+import 'package:distance_edu/UI/Home/ChattingPage.dart';
 import 'package:flutter/material.dart';
 
 class ChatsPage extends StatefulWidget {

@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:bwind/data/hive/model/chat_bot/chat_bot.dart';
-import 'package:bwind/translates.dart';
+ 
+import 'package:distance_edu/data/hive/model/chat_bot/chat_bot.dart';
+import 'package:distance_edu/translates.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:easy_localization/easy_localization.dart';

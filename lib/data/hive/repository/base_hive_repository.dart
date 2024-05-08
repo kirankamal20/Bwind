@@ -1,4 +1,5 @@
- import 'package:bwind/data/hive/model/chat_bot/chat_bot.dart';
+ 
+import 'package:distance_edu/data/hive/model/chat_bot/chat_bot.dart';
 
 abstract class BaseHiveRepository {
   Future<void> saveChatBot({

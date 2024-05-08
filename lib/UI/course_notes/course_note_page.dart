@@ -1,5 +1,5 @@
-import 'package:bwind/Model/getall_notes_model.dart';
-import 'package:bwind/UI/pdf_view/pdf_view.dart';
+import 'package:distance_edu/Model/getall_notes_model.dart';
+import 'package:distance_edu/UI/pdf_view/pdf_view.dart';
 import 'package:flutter/material.dart';
 
 class CourseNotePage extends StatefulWidget {

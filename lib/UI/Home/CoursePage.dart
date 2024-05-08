@@ -1,4 +1,4 @@
-import 'package:bwind/shared/extension/anotted_region_ext.dart';
+import 'package:distance_edu/shared/extension/anotted_region_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

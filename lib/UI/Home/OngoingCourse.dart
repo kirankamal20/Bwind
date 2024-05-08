@@ -1,4 +1,4 @@
-import 'package:bwind/UI/Home/CouseList.dart';
+import 'package:distance_edu/UI/Home/CouseList.dart';
 import 'package:flutter/material.dart';
 
 class OngoingCourse extends StatefulWidget {

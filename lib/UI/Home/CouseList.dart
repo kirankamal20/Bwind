@@ -1,4 +1,4 @@
-import 'package:bwind/UI/Home/CoursePage.dart';
+import 'package:distance_edu/UI/Home/CoursePage.dart';
 import 'package:flutter/material.dart';
 
 class CourseList extends StatefulWidget {

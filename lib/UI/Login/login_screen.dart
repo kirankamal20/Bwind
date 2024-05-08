@@ -1,9 +1,10 @@
-import 'package:bwind/Model/AuthResponse.dart';
-import 'package:bwind/Model/FireAuth.dart';
-import 'package:bwind/UI/Home/HomeScreen.dart';
-import 'package:bwind/UI/Login/ForgotPasswordScreen.dart';
-import 'package:bwind/UI/admin/admin_page.dart';
-import 'package:bwind/validator.dart';
+ 
+import 'package:distance_edu/Model/AuthResponse.dart';
+import 'package:distance_edu/Model/FireAuth.dart';
+import 'package:distance_edu/UI/Home/HomeScreen.dart';
+import 'package:distance_edu/UI/Login/ForgotPasswordScreen.dart';
+import 'package:distance_edu/UI/admin/admin_page.dart';
+import 'package:distance_edu/validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

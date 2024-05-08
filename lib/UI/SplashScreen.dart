@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:bwind/UI/AppInfo/AppInfoScreen.dart';
-import 'package:bwind/UI/Home/HomeScreen.dart';
-import 'package:bwind/UI/Login/LoginOrSignupScreen.dart';
-import 'package:bwind/UI/admin/admin_page.dart';
-import 'package:bwind/shared/extension/anotted_region_ext.dart';
+import 'package:distance_edu/UI/AppInfo/AppInfoScreen.dart';
+import 'package:distance_edu/UI/Home/HomeScreen.dart';
+import 'package:distance_edu/UI/Login/LoginOrSignupScreen.dart';
+import 'package:distance_edu/UI/admin/admin_page.dart';
+import 'package:distance_edu/shared/extension/anotted_region_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

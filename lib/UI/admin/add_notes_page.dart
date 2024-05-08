@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:bwind/shared/helpers/global_helper.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+ import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:distance_edu/shared/helpers/global_helper.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';

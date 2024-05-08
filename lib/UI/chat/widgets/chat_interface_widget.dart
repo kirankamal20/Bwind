@@ -1,11 +1,10 @@
-import 'package:bwind/UI/chat/provider/chat_bot_provider.dart';
-import 'package:bwind/UI/chat/provider/is_build_chatbot_provider.dart';
-import 'package:bwind/UI/chat/provider/is_pdf_read_provider.dart';
-import 'package:bwind/UI/chat/provider/message_provider.dart';
-import 'package:bwind/core/config/type_of_bot.dart';
-import 'package:bwind/core/config/type_of_message.dart';
-import 'package:bwind/core/extension/context.dart';
-import 'package:bwind/data/hive/model/chat_bot/chat_bot.dart';
+ 
+import 'package:distance_edu/UI/chat/provider/is_build_chatbot_provider.dart';
+import 'package:distance_edu/UI/chat/provider/is_pdf_read_provider.dart';
+import 'package:distance_edu/UI/chat/provider/message_provider.dart';
+import 'package:distance_edu/core/config/type_of_message.dart';
+import 'package:distance_edu/core/extension/context.dart';
+import 'package:distance_edu/data/hive/model/chat_bot/chat_bot.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;

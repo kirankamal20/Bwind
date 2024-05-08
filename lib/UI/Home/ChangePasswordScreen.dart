@@ -1,6 +1,6 @@
-import 'package:bwind/Model/AuthResponse.dart';
-import 'package:bwind/Model/FireAuth.dart';
-import 'package:bwind/validator.dart';
+import 'package:distance_edu/Model/AuthResponse.dart';
+import 'package:distance_edu/Model/FireAuth.dart';
+import 'package:distance_edu/validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

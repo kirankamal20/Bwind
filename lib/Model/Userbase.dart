@@ -1,6 +1,7 @@
-import 'package:bwind/Model/AuthResponse.dart';
-import 'package:bwind/Model/FireAuth.dart';
+ 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:distance_edu/Model/AuthResponse.dart';
+import 'package:distance_edu/Model/FireAuth.dart';
 
 import 'PaymentCard.dart';
 

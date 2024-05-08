@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'dart:isolate';
 
-import 'package:bwind/data/hive/model/chat_bot/chat_bot.dart';
-import 'package:bwind/data/hive/repository/hive_repository.dart';
-import 'package:bwind/gemini/repository/gemini_repository.dart';
+ 
 import 'package:dio/dio.dart';
+import 'package:distance_edu/data/hive/model/chat_bot/chat_bot.dart';
+import 'package:distance_edu/data/hive/repository/hive_repository.dart';
+import 'package:distance_edu/gemini/repository/gemini_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';

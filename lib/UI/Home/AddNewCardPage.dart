@@ -1,6 +1,6 @@
-import 'package:bwind/Model/PaymentCard.dart';
-import 'package:bwind/Model/FireAuth.dart';
-import 'package:bwind/Model/Userbase.dart';
+import 'package:distance_edu/Model/PaymentCard.dart';
+import 'package:distance_edu/Model/FireAuth.dart';
+import 'package:distance_edu/Model/Userbase.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';

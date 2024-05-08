@@ -1,9 +1,10 @@
 import 'dart:developer';
 
-import 'package:bwind/Model/quizz_reponse_model.dart';
-import 'package:bwind/UI/quizz/quizz_screen.dart';
-import 'package:bwind/core/extension/context.dart';
-import 'package:bwind/data/const/quizz_json_response.dart';
+
+import 'package:distance_edu/Model/quizz_reponse_model.dart';
+import 'package:distance_edu/UI/quizz/quizz_screen.dart';
+import 'package:distance_edu/core/extension/context.dart';
+import 'package:distance_edu/data/const/quizz_json_response.dart';
 import 'package:flutter/material.dart';
 
 class QuizzmenuPage extends StatefulWidget {

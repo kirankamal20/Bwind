@@ -1,4 +1,5 @@
-import 'package:bwind/core/extension/string.dart';
+ 
+import 'package:distance_edu/core/extension/string.dart';
 import 'package:flutter/material.dart';
 
 abstract class Validators {
